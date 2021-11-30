@@ -105,15 +105,21 @@ par exemple :
 ```
 Et de renommer Ltd par ce que vous venez de copié/collé et renommée plus haut
 
-# features
+# Contenues
 
-> Créer vos & npc facilement via les config
-> 3 type de notification (pour ouvrir le shop (helpnotif,text2d,text3d))
-> Petite intéraction avec le npc (si vous activez les npc ainsi que le drawText)
-> Personnaliser vos menu unique à chaque type de shops
-> 3 types de paiements (money, bank, black money (vous pouvez activez ce que vous voulez 1,2 ou les 3)) pour chaque type de shops
-> Créer vos blips personnalisable par type de shops (visible ou non)
-> MultiJob & Multifaction shop (vous pouvez restreindre le shop a plusiueurs job ou faction ou les 2 ou ne pas les restreindres (donc tout le monde a accès))
+- Créer vos & npc facilement via les config
+
+- 3 type de notification (pour ouvrir le shop (helpnotif,text2d,text3d))
+
+- Petite intéraction avec le npc (si vous activez les npc ainsi que le drawText)
+
+- Personnaliser vos menu unique à chaque type de shops
+
+- 3 types de paiements (money, bank, black money (vous pouvez activez ce que vous voulez 1,2 ou les 3)) pour chaque type de shops
+
+- Créer vos blips personnalisable par type de shops (visible ou non)
+
+- MultiJob & Multifaction shop (vous pouvez restreindre le shop a plusiueurs job ou faction ou les 2 ou ne pas les restreindres (donc tout le monde a accès))
 
 Ce shop est idéal, vous avez énormément de personnalisation disponible directement depuis les configurations, vous n'aurez pas besoin de toucher au code concrètement et il peut vous servir pour plein de type de job que sa soit pour les métier, gangs, normaux, arme en item etc...
 
@@ -125,7 +131,7 @@ Veuillez juste pour les npc a bien respecter se format :
 ```
 # 
 
-:en:
+:gb:
 
 # warning !
 
@@ -221,10 +227,16 @@ and rename Ltd like your new shop
 
 # features
 
-> Create shops & npc easily in config
-> 3 Types of notification (To open shops (helpnotif,text2d,text3d))
-> Little interaction Npc (if you turn on npc and drawText in config)
-> Edit menu for your type of shops
-> 3 Types of payments (money,bank,black money)
-> Blips Created by type of shops (if you turn on blips for this type)
-> MultiJob & Multifaction shops (only job or only faction or both or erveryone)
+- Create shops & npc easily in config
+
+- 3 Types of notification (To open shops (helpnotif,text2d,text3d))
+
+- Little interaction Npc (if you turn on npc and drawText in config)
+
+- Edit menu for your type of shops
+
+- 3 Types of payments (money,bank,black money)
+
+- Blips Created by type of shops (if you turn on blips for this type)
+
+- MultiJob & Multifaction shops (only job or only faction or both or erveryone)
