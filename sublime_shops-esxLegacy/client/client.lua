@@ -127,11 +127,11 @@ Citizen.CreateThread(function()
 								local marker = v.marker
 								if shopPos and distance > 2 then
 									if v.typeNotif == 1 then 
-										F:HelpNotification(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+										F:MarkerHelpNotification(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 									elseif v.typeNotif == 2 then -- ok
-										F:Text2D(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+										F:MarkerText2D(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 									elseif v.typeNotif == 3 then
-										F:Text3D({shopPos.x, shopPos.y}, nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, z = shopPos.z, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+										F:MarkerText3D({shopPos.x, shopPos.y}, nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, z = shopPos.z, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 									end
 								end
 								if distance <= 2 then
@@ -140,7 +140,7 @@ Citizen.CreateThread(function()
 										ShopMenu(k)
 									elseif not openMenu then
 										if v.typeNotif == 1 then
-											F:HelpNotification(
+											F:MarkerHelpNotification(
 												{v.notif.msg},
 												{
 													true, --> visible
@@ -152,7 +152,7 @@ Citizen.CreateThread(function()
 												}
 											)
 										elseif v.typeNotif == 2 then -- ok
-											F:Text2D(
+											F:MarkerText2D(
 												v.notif.msg,
 												{
 													true, --> visible
@@ -164,7 +164,7 @@ Citizen.CreateThread(function()
 												}
 											)
 										elseif v.typeNotif == 3 then
-											F:Text3D(
+											F:MarkerText3D(
 												{shopPos.x, shopPos.y}, --> pos x,y --> Marker & Text 3D
 												{v.notif.msg, scale = nil, font = v.notif.police, z = 0.0}, -->Text 3D, z = pos.z + z
 												{
@@ -188,11 +188,11 @@ Citizen.CreateThread(function()
 						local marker = v.marker
 						if shopPos and distance > 2 then
 							if v.typeNotif == 1 then
-								F:HelpNotification(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+								F:MarkerHelpNotification(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 							elseif v.typeNotif == 2 then -- ok
-								F:Text2D(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+								F:MarkerText2D(nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, pos = {shopPos.x, shopPos.y, shopPos.z}, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 							elseif v.typeNotif == 3 then
-								F:Text3D({shopPos.x, shopPos.y}, nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, z = shopPos.z, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
+								F:MarkerText3D({shopPos.x, shopPos.y}, nil, {true, marker.Type, scale = {marker.Scale.x, marker.Scale.y, marker.Scale.z}, z = shopPos.z, data = {rotate = marker.Rotate, marker.UpDown, marker.FaceCamera}, color = {marker.ColorMarker.r,marker.ColorMarker.g,marker.ColorMarker.b,marker.ColorMarker.a}})
 							end
 						end
 						if distance <= 2 then
@@ -201,7 +201,7 @@ Citizen.CreateThread(function()
 								ShopMenu(k)
 							elseif not openMenu then
 								if v.typeNotif == 1 then
-									F:HelpNotification(
+									F:MarkerHelpNotification(
 										{v.notif.msg},
 										{
 											true, --> visible
@@ -213,7 +213,7 @@ Citizen.CreateThread(function()
 										}
 									)
 								elseif v.typeNotif == 2 then -- ok
-									F:Text2D(
+									F:MarkerText2D(
 										v.notif.msg,
 										{
 											true, --> visible
@@ -225,7 +225,7 @@ Citizen.CreateThread(function()
 										}
 									)
 								elseif v.typeNotif == 3 then
-									F:Text3D(
+									F:MarkerText3D(
 										{shopPos.x, shopPos.y}, --> pos x,y --> Marker & Text 3D
 										{v.notif.msg, scale = nil, font = v.notif.police, z = 0.0}, -->Text 3D, z = pos.z + z
 										{

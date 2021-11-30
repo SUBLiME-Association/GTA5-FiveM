@@ -1,6 +1,6 @@
 F = {}
 -->> Marker <<--
-function F:HelpNotification(helpNotif, marker)
+function F:MarkerHelpNotification(helpNotif, marker)
 	if marker ~= nil then
 		local visible = marker[1]
 		if visible then
@@ -41,7 +41,7 @@ function F:HelpNotification(helpNotif, marker)
 		return nil
 	end
 end
-function F:Text3D(xy, dataTxt, dataMarker)
+function F:MarkerText3D(xy, dataTxt, dataMarker)
 	local posz = dataMarker.z
 	if dataMarker ~= nil then
 		local visible = dataMarker[1]
@@ -78,7 +78,7 @@ function F:Text3D(xy, dataTxt, dataMarker)
 		return nil
 	end
 end
-function F:Text2D(text, marker)
+function F:MarkerText2D(text, marker)
 	if marker ~= nil then
 		local visible = marker[1]
 		if visible then
@@ -135,6 +135,33 @@ function F:Blips(pos, data, visible)
     end)
 end
 -->> Text <<--
+function F:Text3D(x, y, z, text, scale, font, r, g, b, a) --> [Client]
+	local onScreen, _x, _y = World3dToScreen2d(x,y,z)
+	if scale == nil then
+		scale = 0.3
+	else
+		scale = scale
+	end
+	if onScreen then
+		SetTextScale(scale, scale)
+		if font == nil then
+			SetTextFont(6)
+		else
+			SetTextFont(font)
+		end
+		if r == nil or g == nil or b == nil or a == nil then
+			SetTextColour(255, 255, 255, 255)
+		else
+			SetTextColour(r, g, b, a)
+		end
+		SetTextProportional(1)
+		SetTextOutline()
+		SetTextEntry('STRING')
+		SetTextCentre(1)
+		AddTextComponentString(text)
+		DrawText(_x, _y)
+	end
+end
 function F:TextPerso2D(txt, data)
 	local data = {
 		pos = data.pos,
