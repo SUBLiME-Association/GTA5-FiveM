@@ -1,0 +1,1 @@
+print(Config.server[1]..'Object ESX = ', json.encode(Config.server[2]))
