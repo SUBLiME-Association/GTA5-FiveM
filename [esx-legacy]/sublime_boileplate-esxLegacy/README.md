@@ -13,7 +13,7 @@
 - Ceci est un boilerplate pour faire un script sur ESX-LEGACY [v1.3] 
 
 # attention !
-Si vous voulez utilisez le shops avec le doublejob vous aurez besoin de faire des modifications exemple : ``ESX.PlayerData.job2.name`` 
+Si vous voulez utilisez le doublejob vous aurez sans doute besoin de faire des modifications comme par exemple exemple : ``ESX.PlayerData.job2.name`` 
 - Donc remplacez dans ``[client/main.lua]`` :
 ```lua
 RegisterNetEvent('esx:setFaction')

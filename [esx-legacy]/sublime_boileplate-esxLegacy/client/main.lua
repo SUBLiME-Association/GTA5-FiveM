@@ -8,14 +8,14 @@ AddEventHandler('esx:setJob', function(job) ESX.PlayerData.job = job end)
 RegisterNetEvent('esx:setFaction')
 AddEventHandler('esx:setFaction', function(faction) ESX.PlayerData.faction = faction end)
 
--->> Obligatoire pour que votre player soit chargé dans ce script !
+-->> Utile si le joueur se connecte cela permet par exemple d'afficher un blip sur lui idéal pour les policier par exemple
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
 	ESX.PlayerData = xPlayer
 	ESX.PlayerLoaded = true
 end)
 
--->> Obligatoire pour décharge le player qui se déconnect de ce script!
+-->> Utile pour quand un joueur leave si par exemple vous afficher les blips des policier en service ou en voiture ca permettra de le retirer
 RegisterNetEvent('esx:onPlayerLogout')
 AddEventHandler('esx:onPlayerLogout', function()
 	ESX.PlayerLoaded = false
