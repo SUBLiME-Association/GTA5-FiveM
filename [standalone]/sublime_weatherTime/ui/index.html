@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Défi LazyDev boilerplate sublime.dev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container" id="container" style="display: none;">
+        <div class="galerie">
+            <div class="item" onclick='Weathers("EXTRASUNNY")'><img src="img/jour/01d.svg">Soleil</div>
+            <div class="item" onclick='Weathers("CLOUDS")'><img src="img/jour/03d.svg">Nuageux</div>
+            <div class="item" onclick='Weathers("XMAS")'><img src="img/jour/13d.svg">Neige</div>
+            <div class="item" onclick='Weathers("RAIN")'><img src="img/jour/10d.svg">Pluvieux</div>
+            <div class="item" onclick='Weathers("THUNDER")'><img src="img/jour/11d.svg">Orageux</div>
+            <div class="item" onclick='Weathers("CLEAR")'><img src="img/nuit/01n.svg">Nuit</div>
+        </div>
+
+        <div class="galerie">
+            <div class="item time" onclick='Timing(24)'>00H</div>
+            <div class="item time" onclick='Timing(1)'>01H</div>
+            <div class="item time" onclick='Timing(2)'>02H</div>
+            <div class="item time" onclick='Timing(3)'>03H</div>
+            <div class="item time" onclick='Timing(4)'>04H</div>
+            <div class="item time" onclick='Timing(5)'>05H</div>
+            <div class="item time" onclick='Timing(6)'>06H</div>
+            <div class="item time" onclick='Timing(7)'>07H</div>
+            <div class="item time" onclick='Timing(8)'>08H</div>
+            <div class="item time" onclick='Timing(9)'>09H</div>
+            <div class="item time" onclick='Timing(10)'>10H</div>
+            <div class="item time" onclick='Timing(11)'>11H</div>
+            <div class="item time" onclick='Timing(12)'>12H</div>
+            <div class="item time" onclick='Timing(13)'>13H</div>
+            <div class="item time" onclick='Timing(14)'>14H</div>
+            <div class="item time" onclick='Timing(15)'>15H</div>
+            <div class="item time" onclick='Timing(16)'>16H</div>
+            <div class="item time" onclick='Timing(17)'>17H</div>
+            <div class="item time" onclick='Timing(18)'>18H</div>
+            <div class="item time" onclick='Timing(19)'>19H</div>
+            <div class="item time" onclick='Timing(20)'>20H</div>
+            <div class="item time" onclick='Timing(21)'>21H</div>
+            <div class="item time" onclick='Timing(22)'>22H</div>
+            <div class="item time" onclick='Timing(23)'>23H</div>
+        </div>
+        <!--<script>console.log('scripted')</script>-->
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
