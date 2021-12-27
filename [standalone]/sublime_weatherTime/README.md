@@ -1,4 +1,4 @@
-# sublime_weatherTile
+# sublime_weatherTime
 
 __Script standalone, ui -> (html/css) fait par Cossart et début du script en javascript par SUP2Ak__
 
