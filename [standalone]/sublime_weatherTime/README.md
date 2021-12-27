@@ -6,7 +6,7 @@ __Ce script est à la base un défi provenant du discord du membre de l'associat
 
 - synchro serveur (pour que tout les joueurs voient la map identique)
 - temps en jeux (chercher native)
-- et quelque correction voir dans le index.html les paraùètre dans la fonction Weathers("RAIN"), rain est censé être la pluie mais personnelement j'ai pas de plus in game à voire en essayant les autre hashname météo
+- et quelque correction voir dans le index.html les paramètre dans la fonction Weathers("RAIN"), rain est censé être la pluie mais personnelement j'ai pas de pluie in game à voire en essayant les autre hashName météo (weather)
 
 __Pour ouvrir/fermer l'ui in game faite [F8] et taper dans la console : weather__
 
