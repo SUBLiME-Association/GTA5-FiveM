@@ -18,14 +18,23 @@ AddEventHandler('esx:onPlayerSpawn', function()
                 SublimeIndex.StartCharacterCreator()
             else
                 TriggerEvent('skinchanger:loadSkin', skin)
+                Wait(50)
+                SublimeIndex.ReLoadSkin() --> Reload le skin ( en cas de bug )
             end
         end)
     end)
 end)
 
-RegisterCommand("test", function(source, args, rawCommand)
-    SublimeIndex.StartCharacterCreator()
-end, false)
+
+---ReLoadSkin
+---@public
+function SublimeIndex.ReLoadSkin()
+    Wait(1000)
+    ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+        TriggerEvent('skinchanger:loadSkin', skin)
+    end)
+end
+
 
 
 ---@class SetPlayerBuckets
