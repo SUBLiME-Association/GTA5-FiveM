@@ -9,6 +9,6 @@ GTA5-FiveM is a repository containing all the resources developed by the Sublime
     - [Sublime shops (esxLegacy)]([esx-legacy]/sublime_shops-esxLegacy/README.md)
     - [Sublime multiFarming (esxLegacy)]([esx-legacy]/sublime_multiFarming-esxLegacy/README.md)
     - [Sublime boileplate (esxLegacy)]([esx-legacy]/sublime_boileplate-esxLegacy/README.md)
-    - [Sublime player Creator (esxLegacy)](sublime_playerCreator-esxLegacy/README.md)
+    - [Sublime player Creator (esxLegacy)]([esx-legacy]/sublime_playerCreator-esxLegacy/README.md)
 - [standalone resource]([standalone]/README.md)
     - [Sublime weatherTime (standalone)]([standalone]/sublime_weatherTime/README.md)
