@@ -18,7 +18,7 @@ end
 local function endIdentity()
     if endIdentity_ then
         local _sex if sexe == "Homme" then _sex = "H" else _sex = "F" end
-        TriggerServerEvent(Config.Prefix.."characterCreator", {
+        TriggerServerEvent(Config.Prefix.."updateIdentity", {
             lastName = nom,
             firstName = prenom,
             height = taille,
