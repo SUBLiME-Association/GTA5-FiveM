@@ -1,0 +1,113 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+/* BASE */
+::before,
+::after,
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto;
+    color: #f1f1f1;
+}
+
+.container {
+    background: linear-gradient(180deg, rgb(28, 33, 56) 0%, rgb(38, 44, 73) 50%, rgb(51, 55, 88) 100%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1100px;
+    height: 80%;
+    border-radius: 30px;
+    overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+    background-color: #585858;
+    border-radius: 1em;
+}
+
+.container::-webkit-scrollbar-thumb {
+    border-radius: 1em;
+    background-color: #c1c1c1;
+    border: 3px solid #585858;
+}
+
+.container::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/* AMMUNATION */
+.title {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.galerie {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 95%;
+  max-width: 1400px;
+  margin: 20px auto 0;
+}
+
+.item {
+  width: 200px;
+  height: 180px;
+  margin: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-align: center;
+  border-radius: 8px;
+  background: rgba(221, 218, 218, 0.13);
+}
+
+.item img {
+    width: 120px;
+    transition: 0.3s;
+}
+
+.item img:hover {
+    width: 140px;
+    transition: 0.3s;
+}
+
+.weapon_price {
+    color: #04ad04;
+}
+
+/* LICENCE */
+.licence-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.licence-content p {
+    font-size: 28px;
+    color: #04ad04;
+}
+
+.btn-licence {
+    padding: 10px 30px;
+    border: none;
+    font-size: 24px;
+    font-family: Roboto;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Copyright (c) 2022 Sublime */
