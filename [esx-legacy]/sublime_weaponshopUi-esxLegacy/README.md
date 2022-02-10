@@ -6,4 +6,5 @@ L'armurie vend des armes en item et les armes peut être facilement configurable
 Attention si vous changez le nom de la ressource, elle ne fonctionnera plus !
 
 ## Require :
-- [esx_license](https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_license)
+- [esx-legacy](https://github.com/esx-framework/esx-legacy)
+- [esx_weaponsync](https://github.com/Arood/esx_weaponsync)
