@@ -1,4 +1,3 @@
-_Admin.SQLWrapperType = GetSQL_Wrapper()
 
 RegisterServerEvent(_Admin.Prefix.."sendPrivateNotification")
 AddEventHandler(_Admin.Prefix.."sendPrivateNotification", function(player, message, mugshot)
@@ -29,6 +28,9 @@ function GetSQL_Wrapper()
         _Admin.Print("~r~ERROR SQL WRAPPER NON RECONNU")
     end
 end
+
+_Admin.SQLWrapperType = GetSQL_Wrapper()
+
 
 
 RegisterNetEvent(_Admin.Prefix.."kickPlayer")
