@@ -25,6 +25,6 @@ function _Admin.Menu.Create()
     _Admin.Menu.sub_Developpement = RageUI.CreateSubMenu(_Admin.Menu.main, GetPlayerName(PlayerId()), "ACTIONS DISPONIBLES");
     _Admin.Menu.sub_ownerManagement = RageUI.CreateSubMenu(_Admin.Menu.main, GetPlayerName(PlayerId()), "ACTIONS DISPONIBLES");
     _Admin.Menu.sub_ownerManagementBans = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, GetPlayerName(PlayerId()), "LISTE DES BANS");
-    _Admin.Menu.sub_ownerManagementStaff = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, GetPlayerName(PlayerId()), "LISTE DES BANS");
+    _Admin.Menu.sub_ownerManagementStaff = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, GetPlayerName(PlayerId()), "LISTE DES STAFF");
 
 end

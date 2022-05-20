@@ -45,7 +45,7 @@ _Admin.Config = {
     },
     --
     -- Weather System from https://github.com/thefrcrazy/crz_weather
-    UseWeatherAndTimeSync = true;
+    UseWeatherAndTimeSync = false; -- true if you don't use script like vSync / cd_easytime ....
     Weather = {
         allWeatherList = { "EXTRASUNNY", "CLEAR", "SMOG", "FOGGY", "OVERCAST", "CLOUDS", "NEUTRAL", "CLEARING", "RAIN", "THUNDER", "SNOW", "SNOWLIGHT", "BLIZZARD", "XMAS", "HALLOWEEN" },
         defaultWeather = "EXTRASUNNY",
