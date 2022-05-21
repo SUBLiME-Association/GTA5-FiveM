@@ -221,7 +221,7 @@ function SublimeIndex.OpenCharacterCreator()
 
 
         RageUI.IsVisible(subvalid, function()
-            if iIndex.tenues.Torso1 ~= 1 and iIndex.visage.iHair ~= 1 then
+            if iIndex.tenues.Torso1 ~= 1 then
                 RageUI.Button("Confirmer", "Cette action et définitive", {RightBadge = RageUI.BadgeStyle.Star, Color = {HightLightColor = {100, 178, 82, 220}, BackgroundColor = {100, 178, 82, 130}}}, true, {
                     onSelected = function()
                         Citizen.CreateThread(function()
