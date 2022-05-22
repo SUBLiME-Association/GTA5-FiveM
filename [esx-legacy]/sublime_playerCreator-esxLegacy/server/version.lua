@@ -35,12 +35,12 @@ Citizen.CreateThread(function()
 			    else
 				    print((
                         [[
-^7----------------------------------------------------------------------
-^3INFORMATION: ^6Veuillez mettre à jour %s!
-^3VERSION: ^6La version %s est disponible!
-^3CHANGELOG:^6 %s
-^3DOWNLOAD:^6 %s
-^7-----------------------------------------------------------------------
+^6----------------------------------------------------------------------
+^4INFORMATION: ^2Veuillez mettre à jour %s!
+^4VERSION: ^2La version %s est disponible!
+^4CHANGELOG:^2 %s
+^4DOWNLOAD:^2 %s
+^6-----------------------------------------------------------------------
 ]]):format(_gv.script,_gv.version,_gv.changelog,_gv.link))
                 end
 			else
