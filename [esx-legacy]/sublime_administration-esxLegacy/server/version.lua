@@ -5,13 +5,13 @@
 local Version = 
 ([==[{ 
     "enable": true,
-    "script": "sublime_playerCreator",
-    "version": "0.0.1",
-    "changelog": "Correction coord z au first spawn + possibiliter de créer un personnage chauve.",
-    "link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_playerCreator-esxLegacy"
+    "script": "sublime_administration",
+    "version": "1.1",
+    "changelog": "Correction requête sql gestion staff & bans.",
+    "link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
-local HTTPrequest = "https://raw.githubusercontent.com/SUBLiME-Association/version-script-sublime/main/sublime-playerCreator.json"
+local HTTPrequest = "https://raw.githubusercontent.com/SUBLiME-Association/version-script-sublime/main/sublime-administration.json"
 
 Citizen.CreateThread(function()
 	local _v = json.decode(Version)
