@@ -27,25 +27,29 @@ AddEventHandler(_Admin.Prefix.."RefreshBans", function()
     local query = 'SELECT * FROM users, sublime_bans WHERE users.identifier = sublime_bans.identifier'
     if _Admin.SQLWrapperType == 1 then
         MySQL.Async.fetchAll(query, {}, function(result)
-            for _,v in pairs(result) do
-                Bans[#Bans+1] = {
-                    identifier = result[i].identifier,
-                    name = result[i].firstname..' '..result[i].lastname,
-                    reason = v.reason,
-                    expiration = v.expiration,
-                }
+            if result ~= nil then
+                for _,v in pairs(result) do
+                    Bans[#Bans+1] = {
+                        identifier = result[i].identifier,
+                        name = result[i].firstname..' '..result[i].lastname,
+                        reason = v.reason,
+                        expiration = v.expiration,
+                    }
+                end
             end
             TriggerClientEvent(_Admin.Prefix.."SendBans", _src, Bans)
         end)
     else
         MySQL.query(query, {}, function(result)
-            for i = 1, #result do
-                Bans[#Bans+1] = {
-                    identifier = result[i].identifier,
-                    name = result[i].firstname..' '..result[i].lastname,
-                    reason = v.reason,
-                    expiration = v.expiration,
-                }
+            if result ~= nil then
+                for i = 1, #result do
+                    Bans[#Bans+1] = {
+                        identifier = result[i].identifier,
+                        name = result[i].firstname..' '..result[i].lastname,
+                        reason = v.reason,
+                        expiration = v.expiration,
+                    }
+                end
             end
             TriggerClientEvent(_Admin.Prefix.."SendBans", _src, Bans)
         end)
@@ -62,23 +66,27 @@ AddEventHandler(_Admin.Prefix.."RefreshStaff", function()
     local Staff = {}
     if _Admin.SQLWrapperType == 1 then 
         MySQL.Async.fetchAll(query, {}, function(result)
-            for i = 1, #result do
-                Staff[#Staff+1] = {
-                    identifier = result[i].identifier,
-                    rank = result[i].rank,
-                    name = result[i].firstname..' '..result[i].lastname,
-                }
+            if result ~= nil then
+                for i = 1, #result do
+                    Staff[#Staff+1] = {
+                        identifier = result[i].identifier,
+                        rank = result[i].rank,
+                        name = result[i].firstname..' '..result[i].lastname,
+                    }
+                end
             end
             TriggerClientEvent(_Admin.Prefix.."SendStaff", _src, Staff)
         end)
     else
         MySQL.query(query, {}, function(result)
-            for i = 1, #result do
-                Staff[#Staff+1] = {
-                    identifier = result[i].identifier,
-                    rank = result[i].rank,
-                    name = result[i].firstname..' '..result[i].lastname,
-                }
+            if result ~= nil then
+                for i = 1, #result do
+                    Staff[#Staff+1] = {
+                        identifier = result[i].identifier,
+                        rank = result[i].rank,
+                        name = result[i].firstname..' '..result[i].lastname,
+                    }
+                end
             end
             TriggerClientEvent(_Admin.Prefix.."SendStaff", _src, Staff)
         end)

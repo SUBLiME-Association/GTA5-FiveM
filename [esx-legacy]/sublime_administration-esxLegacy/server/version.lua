@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
     "script": "sublime_administration",
-    "version": "1.1",
-    "changelog": "Correction requête sql gestion staff & bans.",
+    "version": "1.2",
+    "changelog": "Correction requête SQL (refreshDATA) ban & staff si les tables sont vides.",
     "link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
