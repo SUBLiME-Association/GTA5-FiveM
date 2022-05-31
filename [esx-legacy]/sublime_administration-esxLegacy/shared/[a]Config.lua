@@ -30,6 +30,11 @@ _Admin.Config = {
         ['No Clip Toggle'] = {btn = 'F3', description = "No Clip"}, --> No clip
     },
     --
+    Revive = { --> Si vous avez une commande revive (régler pour esx_ambulancejob par défaut)
+        enable = true,
+        command = 'revive '
+    },
+    --
     NoClip = {
         Controls = {
             goSprint = 21,-- Left Shift

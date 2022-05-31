@@ -10,6 +10,7 @@ local _ = {
 function _Admin.Panel:Main(rank)
     _.rank = rank
     _Admin.Menu.Create()
+    _Admin.GetAllPlayersOnline()
     _Admin.RefreshAllItems()
     _Admin.RefreshSublimeData()
     _Admin.RefreshBans()
@@ -20,7 +21,7 @@ function _Admin.Panel:Main(rank)
         
         RageUI.IsVisible(_Admin.Menu.main, function()
 
-            RageUI.Button('Joueurs Connectés', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_PlayerConnected.access), {}, _Admin.Menu.sub_allPlayers);
+            RageUI.Button('Joueurs Connectés', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_PlayerConnected.access), {onSelected = function() _Admin.GetAllPlayersOnline() end}, _Admin.Menu.sub_allPlayers);
 
             RageUI.Button('Mon Personnage', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_myPlayer.access), {}, _Admin.Menu.sub_myPlayer);
 
@@ -36,7 +37,7 @@ function _Admin.Panel:Main(rank)
 
 
         RageUI.IsVisible(_Admin.Menu.sub_allPlayers, function()
-            _Admin.Panel:OnlinePlayers(_.rank, ESX.Game.GetPlayers()) --ESX.Game.GetPlayers(true)
+            _Admin.Panel:OnlinePlayers(_.rank)
         end)
 
         RageUI.IsVisible(_Admin.Menu.sub_allPlayers2, function()
@@ -122,6 +123,40 @@ function _Admin.Panel:Main(rank)
         RageUI.IsVisible(_Admin.Menu.sub_ownerManagementStaff, function()
             _Admin.Panel:OwnerManagementStaff(_.rank)
         end)
+
+        --
+
+        RageUI.IsVisible(_Admin.Menu.sub_allPlayers3, function() -- JOB ALL PLAYERS 1
+            _Admin.Panel:PlayerDetailsJobs1(_Admin.allJobs)
+        end)
+
+        RageUI.IsVisible(_Admin.Menu.sub_allPlayers33, function() -- JOB ALL PLAYERS 2
+            _Admin.Panel:PlayerDetailsJobs2(_.rank, _Admin.newMenuTitle, _Admin.jobName, _Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.AdminName)
+        end)
+
+        --RageUI.IsVisible(_Admin.Menu.sub_allPlayers4, function() -- FACTION ALL PLAYERS 1
+        --    _Admin.Panel:PlayerDetailsFactions1(_.rank, allFactions)
+        --end)
+
+        --RageUI.IsVisible(_Admin.Menu.sub_allPlayers44, function() -- FACTION ALL PLAYERS 2
+        --    _Admin.Panel:PlayerDetailsFactions2(_.rank, )
+        --end)
+
+        RageUI.IsVisible(_Admin.Menu.sub_myPlayerOptions1, function() -- JOB MY PLAYER 1
+            _Admin.Panel:MyPlayerJobs1(_Admin.allJobs)
+        end)
+
+        RageUI.IsVisible(_Admin.Menu.sub_myPlayerOptions11, function() -- JOB MY PLAYER 2
+            _Admin.Panel:MyPlayerJobs2(_Admin.newMenuTitle, _Admin.jobName)
+        end)
+
+        --RageUI.IsVisible(_Admin.Menu.sub_myPlayerOptions2, function() -- FACTION MY PLAYER 1
+        --    _Admin.Panel:MyPlayerFactions1(_.rank, allFactions)
+        --end)
+
+        --RageUI.IsVisible(_Admin.Menu.sub_myPlayerOptions22, function() -- FACTION MY PLAYER 2
+        --    _Admin.Panel:MyPlayerFactions2(_.rank, )
+        --end)
 
 
         if not RageUI.Visible(_Admin.Menu.main)

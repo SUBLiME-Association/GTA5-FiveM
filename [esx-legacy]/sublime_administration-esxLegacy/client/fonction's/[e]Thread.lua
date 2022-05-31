@@ -112,3 +112,25 @@ function DrawActivateOptions()
     end
 end
 
+
+
+CreateThread(function() --> spécial précharge pour Admin les Callback lourd 1x à la connection
+    Wait(5000)
+    ESX.TriggerServerCallback(_Admin.Prefix.."OwnerPermissions", function(bool) 
+        if bool then
+            local rank = { name = "Owner", grade = "Owner" }
+            if _Admin:HaveAccess(rank, _Admin.Permissions.SetJob) then
+                _Admin.GetAllJobsFactions()
+            end
+        else
+            ESX.TriggerServerCallback(_Admin.Prefix.."CheckStaffPermissions", function(rank)
+                if _Admin:HaveAccess(rank, _Admin.Permissions.SetJob) then
+                    _Admin.GetAllJobsFactions()
+                end
+            end)
+        end
+    end)
+end)
+
+
+

@@ -5,10 +5,10 @@
 local Version = 
 ([==[{ 
     "enable": true,
-    "script": "sublime_administration",
-    "version": "1.2",
-    "changelog": "Correction requête SQL (refreshDATA) ban & staff si les tables sont vides.",
-    "link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
+	"script": "sublime_administration",
+    "version": "1.3",
+    "changelog": "\n\t- Correction du noms des joueurs en ligne (prends identity si es_extended connfig.identity = true\n\t- Ajout du setJob joueur en ligne\n\t- Ajout du setJob player option\n\t- Modification du bouton revive joeur en ligne, passe par la commande esx /revive de esx_ambulancejob (possible de desactiver dans le config pour un revive standalone)",
+	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
 local HTTPrequest = "https://raw.githubusercontent.com/SUBLiME-Association/version-script-sublime/main/sublime-administration.json"

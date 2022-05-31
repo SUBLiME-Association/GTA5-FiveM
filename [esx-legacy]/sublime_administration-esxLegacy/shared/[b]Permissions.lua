@@ -13,7 +13,8 @@ _Admin.Ranks = { --> Vous pouvez crée autant de grade que vous le souhaité
 _Admin.Permissions = {
 
     NoClip = {3;2;1};
-    
+    SetJob = {3;2;1};
+
     Button_PlayerConnected = { access = {3;2;1}; inside = {
         --
         SelectPlayer = { access = {3;2;1}; inside = {

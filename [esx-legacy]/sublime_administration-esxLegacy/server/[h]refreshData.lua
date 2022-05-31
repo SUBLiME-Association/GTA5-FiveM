@@ -127,3 +127,18 @@ AddEventHandler(_Admin.Prefix.."GetListOfAllItems", function()
         end)
     end
 end)
+
+
+ESX.RegisterServerCallback(_Admin.Prefix.."GetAdminName", function(source,cb)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    cb(xPlayer.getName())
+end)
+
+ESX.RegisterServerCallback(_Admin.Prefix..'Get:Jobs-Factions', function(source, cb)
+    local data = {}
+    data.jobs = ESX.GetJobs()
+    --if Config.SetFaction then
+    --    data.factions = ESX.GetFactions()
+    --end
+    cb(data)
+end)

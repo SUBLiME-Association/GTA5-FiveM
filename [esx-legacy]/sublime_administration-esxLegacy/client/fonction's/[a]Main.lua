@@ -200,3 +200,30 @@ RegisterNetEvent(_Admin.Prefix.."LoadListOfAllItems")
 AddEventHandler(_Admin.Prefix.."LoadListOfAllItems", function(listItems)
     _Admin.ItemsList = listItems
 end)
+
+
+_Admin.allJobs, _Admin.allFactions = {}, {}
+--function _Admin.GetAllJobs()
+--    ESX.TriggerServerCallback(_Admin.Prefix.."GetAllJobsGrades", function(result)
+--        allJobs = result
+--    end)
+--end
+function _Admin.GetAllJobsFactions()
+    ESX.TriggerServerCallback(_Admin.Prefix..'Get:Jobs-Factions', function(result)
+        _Admin.allJobs = result.jobs
+        --if Config.SetFaction then
+        --    allFactions = result.factions
+        --end
+    end)
+end
+
+_Admin.dataPlayers = {}
+_Admin.adminName = nil
+function _Admin.GetAllPlayersOnline()
+    ESX.TriggerServerCallback(_Admin.Prefix.."GetAllPlayersOnline", function(result)
+        _Admin.dataPlayers = result
+    end)
+    ESX.TriggerServerCallback(_Admin.Prefix.."GetAdminName", function(result)
+        _Admin.adminName = result
+    end)
+end

@@ -183,7 +183,8 @@ function _Admin.Panel:MyPlayerOptions(rank)
         })
     end
 
-
+    RageUI.Button("SetJob", "S'attribuer un job", {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _Admin.Permissions.SetJob), {}, _Admin.Menu.sub_myPlayerOptions1);
+    
     RageUI.Button('Éliminer les dommages de sangs', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Clear_Blood), {
         onSelected = function()
             ClearPedBloodDamage(PlayerPedId())
@@ -198,4 +199,35 @@ function _Admin.Panel:MyPlayerOptions(rank)
     });
     
 
+end
+
+function _Admin.Panel:MyPlayerJobs1(Jobs)
+    _Admin.jSelected = nil or {}
+    for k,v in pairs(Jobs)do
+        RageUI.Button(v.label, k, {RightLabel = "~c~→→→"}, true, {
+            onSelected = function()
+                _Admin.newMenuTitle = v.label
+                _Admin.jobName = k
+                for k2,v2 in pairs(v)do
+                    if k2 == 'grades' then
+                        for key, value in pairs(v2) do
+                            _Admin.jSelected[#j_Admin.Selected+1] = value
+                        end
+                    end
+                end
+            end
+        }, _Admin.Menu.sub_myPlayerOptions11);
+    end
+end
+
+function _Admin.Panel:MyPlayerJobs2(nTitle, jName)
+    _Admin.Menu.sub_allPlayers33:SetTitle(nTitle)
+    for k,v in pairs(_Admin.jSelected)do
+        local description = ("~c~~y~job_name ~s~\t: \t"..jName..'\n~c~~y~job_label ~s~\t: \t'..nTitle..'\n~c~~y~grade ~s~\t\t: \t'..v.grade..'\n~c~~y~grade_label ~s~\t: \t'..v.label..'\n~c~~y~salary ~s~\t\t: \t~g~'..v.salary..'$')
+        RageUI.Button(v.label, description, {RightLabel = "~c~→→→"}, true, {
+            onSelected = function() -- GetPlayerServerId(localId)
+                TriggerServerEvent(_Admin.Prefix.."setJob", 1, nil, _Admin.jobName, v.grade, nTitle, v.label)
+            end
+        });
+    end
 end

@@ -261,3 +261,16 @@ AddEventHandler(_Admin.Prefix.."RemoveAdminPermissions", function(identifier)
         end)
     end
 end)
+
+RegisterServerEvent(_Admin.Prefix.."setJob")
+AddEventHandler(_Admin.Prefix.."setJob", function(value,target,job,grade,label,grade_label)
+    if value == 1 then
+        local xPlayer = ESX.GetPlayerFromId(source)
+        xPlayer.setJob(job, grade)
+        xPlayer.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
+    else
+	    local xTarget = ESX.GetPlayerFromId(target)
+        xTarget.setJob(job, grade)
+        xTarget.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
+    end
+end) 

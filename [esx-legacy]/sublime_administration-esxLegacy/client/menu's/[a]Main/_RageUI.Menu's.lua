@@ -26,5 +26,12 @@ function _Admin.Menu.Create()
     _Admin.Menu.sub_ownerManagement = RageUI.CreateSubMenu(_Admin.Menu.main, GetPlayerName(PlayerId()), "ACTIONS DISPONIBLES");
     _Admin.Menu.sub_ownerManagementBans = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, GetPlayerName(PlayerId()), "LISTE DES BANS");
     _Admin.Menu.sub_ownerManagementStaff = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, GetPlayerName(PlayerId()), "LISTE DES STAFF");
-
+    _Admin.Menu.sub_allPlayers3 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, GetPlayerName(PlayerId()), "GESTION JOB")
+    _Admin.Menu.sub_allPlayers33 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers3, "", "GESTION JOB - GRADE")
+    --_Admin.Menu.sub_allPlayers4 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, GetPlayerName(PlayerId()), "GESTION FACTION")
+    --_Admin.Menu.sub_allPlayers44 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers4, "", "GESTION FACTION - GRADE")
+    _Admin.Menu.sub_myPlayerOptions1 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions, GetPlayerName(PlayerId()), "GESTION JOB")
+    _Admin.Menu.sub_myPlayerOptions11 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions1, "", "GESTION JOB - GRADE")
+    --_Admin.Menu.sub_myPlayerOptions2 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions, GetPlayerName(PlayerId()), "GESTION FACTION")
+    --_Admin.Menu.sub_myPlayerOptions22 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions2, "", "GESTION FACTION - GRADE")
 end
