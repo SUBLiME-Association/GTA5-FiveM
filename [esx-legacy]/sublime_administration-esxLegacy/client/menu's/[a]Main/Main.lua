@@ -41,7 +41,7 @@ function _Admin.Panel:Main(rank)
         end)
 
         RageUI.IsVisible(_Admin.Menu.sub_allPlayers2, function()
-            _Admin.Panel:PlayerDetails(_.rank, _Admin.SelectedPlayer)
+            _Admin.Panel:PlayerDetails(_.rank, _Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.AdminName)
         end)
         
         RageUI.IsVisible(_Admin.Menu.sub_myPlayer, function()
@@ -182,6 +182,14 @@ function _Admin.Panel:Main(rank)
         and not RageUI.Visible(_Admin.Menu.sub_ownerManagement)
         and not RageUI.Visible(_Admin.Menu.sub_ownerManagementBans)
         and not RageUI.Visible(_Admin.Menu.sub_ownerManagementStaff)
+        and not RageUI.Visible(_Admin.Menu.sub_allPlayers3) -- Job1
+        and not RageUI.Visible(_Admin.Menu.sub_allPlayers33) -- Job2
+        --and not RageUI.Visible(_Admin.Menu.sub_allPlayers4) -- Faction1
+        --and not RageUI.Visible(_Admin.Menu.sub_allPlayers44) -- Faction2
+        and not RageUI.Visible(_Admin.Menu.sub_myPlayerOptions1) -- Job1
+        and not RageUI.Visible(_Admin.Menu.sub_myPlayerOptions11) -- Job2
+        --and not RageUI.Visible(_Admin.Menu.sub_myPlayerOptions2) -- Faction1
+        --and not RageUI.Visible(_Admin.Menu.sub_myPlayerOptions22) -- Faction2
 
         then
             _Admin.Menu.main = RMenu:DeleteType('_Admin.Menu.main', true)   

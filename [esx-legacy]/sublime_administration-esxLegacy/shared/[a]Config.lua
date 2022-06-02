@@ -13,7 +13,7 @@ _Admin.Prefix = "Sublime-Administration";
 
 
 _Admin.Logs = {
-    WebHook = "https://discord.com/api/webhooks/868195899594141737/4p5pDCqnfuGiTi06u_e1BJlFTwn1RCEaSqgMV38uihzB0_2YA7NiDRvIUnd53KsZF44F";
+    WebHook = "";
     BotName = "Sublime-Logs";
     Color = 3092790;
     IconURL = "https://zupimages.net/up/21/48/fy8g.png"; 
@@ -23,7 +23,9 @@ _Admin.Logs = {
 _Admin.Config = {
     EnablePrints = true;
     --
-    SQL_Wrapper = "mysql-async", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
+    DoubleJob = false, -- false ou 'fbase' (fbase = doublejob qui passe sur la meme fonction ESX.DoesJobExist)
+    --
+    SQL_Wrapper = "oxmysql", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
     --
     Macro = {
         ['Open Main Menu'] = {btn = 'F10', description = "~r~Open Admin Panel~s~"}, --> Open panel

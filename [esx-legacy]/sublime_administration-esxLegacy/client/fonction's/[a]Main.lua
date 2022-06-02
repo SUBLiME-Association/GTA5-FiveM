@@ -203,22 +203,25 @@ end)
 
 
 _Admin.allJobs, _Admin.allFactions = {}, {}
---function _Admin.GetAllJobs()
---    ESX.TriggerServerCallback(_Admin.Prefix.."GetAllJobsGrades", function(result)
---        allJobs = result
---    end)
---end
-function _Admin.GetAllJobsFactions()
-    ESX.TriggerServerCallback(_Admin.Prefix..'Get:Jobs-Factions', function(result)
-        _Admin.allJobs = result.jobs
-        --if Config.SetFaction then
-        --    allFactions = result.factions
-        --end
+
+if _Admin.Config.DoubleJob == true then
+    CreateThread(function()
+        while true do
+            Wait(3500)
+            print("VEUILLEZ REMETTRE Config.DoubleJob SUR FALSE ou 'fbase' SI VOUS UTILISEZ ESX-LEGACY DE FELLOW, ACTUELLEMENT NON DISPONIBLE SUR TRUE")
+        end
     end)
+elseif _Admin.Config.DoubleJob == 'fbase' or _Admin.Config.DoubleJob == false then
+    function _Admin.GetAllJobsFactions()
+        ESX.TriggerServerCallback(_Admin.Prefix.."GetAllJobsGrades", function(result)
+            _Admin.allJobs = result
+        end)
+    end  
 end
 
 _Admin.dataPlayers = {}
 _Admin.adminName = nil
+
 function _Admin.GetAllPlayersOnline()
     ESX.TriggerServerCallback(_Admin.Prefix.."GetAllPlayersOnline", function(result)
         _Admin.dataPlayers = result

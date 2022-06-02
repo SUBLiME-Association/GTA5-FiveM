@@ -263,14 +263,36 @@ AddEventHandler(_Admin.Prefix.."RemoveAdminPermissions", function(identifier)
 end)
 
 RegisterServerEvent(_Admin.Prefix.."setJob")
-AddEventHandler(_Admin.Prefix.."setJob", function(value,target,job,grade,label,grade_label)
-    if value == 1 then
-        local xPlayer = ESX.GetPlayerFromId(source)
-        xPlayer.setJob(job, grade)
-        xPlayer.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
-    else
-	    local xTarget = ESX.GetPlayerFromId(target)
-        xTarget.setJob(job, grade)
-        xTarget.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
+AddEventHandler(_Admin.Prefix.."setJob", function(value,target,job,grade,label,grade_label,job_type)
+    if _Admin.Config.DoubleJob == false then
+        if value == 1 then
+            local xPlayer = ESX.GetPlayerFromId(source)
+            xPlayer.setJob(job, grade)
+            xPlayer.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
+        else
+	        local xTarget = ESX.GetPlayerFromId(target)
+            xTarget.setJob(job, grade)
+            xTarget.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label)
+        end
+    elseif _Admin.Config.DoubleJob == 'fbase' then
+        if value == 1 then
+            local xPlayer = ESX.GetPlayerFromId(source)
+            if job_type == 'job' then
+                xPlayer.setJob(job, grade)
+                xPlayer.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label.." ~s~|~b~ ~c~["..'~b~'..job_type..'~c~]')
+            elseif job_type == 'job2' then
+                xPlayer.setJob2(job, grade)
+                xPlayer.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label.." ~s~|~b~ ~c~["..'~b~'..job_type..'~c~]')
+            end
+        else
+	        local xTarget = ESX.GetPlayerFromId(target)
+            if job_type == 'job' then
+                xTarget.setJob(job, grade)
+                xTarget.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label.." ~s~|~b~ ~c~["..'~b~'..job_type..'~c~]')
+            elseif job_type == 'job2' then
+                xTarget.setJob2(job, grade)
+                xTarget.showNotification("Vous êtes à présent~s~ : \n- ~g~"..label.." ~s~|~b~ "..grade_label.." ~s~|~b~ ~c~["..'~b~'..job_type..'~c~]')
+            end
+        end
     end
 end) 

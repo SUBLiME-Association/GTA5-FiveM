@@ -156,17 +156,11 @@ _Admin.jSelected = {}
 function _Admin.Panel:PlayerDetailsJobs1(Jobs)
     _Admin.jSelected = nil or {}
     for k,v in pairs(Jobs)do
-        RageUI.Button(v.label, k, {RightLabel = "~c~→→→"}, true, {
+        RageUI.Button(v.label,nil, {RightLabel = "~c~→→→"}, true, {
             onSelected = function()
                 _Admin.newMenuTitle = v.label
                 _Admin.jobName = k
-                for k2,v2 in pairs(v)do
-                    if k2 == 'grades' then
-                        for key, value in pairs(v2) do
-                            _Admin.jSelected[#_Admin.jSelected+1] = value
-                        end
-                    end
-                end
+                _Admin.jSelected = v
             end
         }, _Admin.Menu.sub_allPlayers33);
     end
@@ -177,14 +171,32 @@ function _Admin.Panel:PlayerDetailsJobs2(rank, nTitle, jName, localId, name, aNa
     local _name = tostring(name)
     _Admin.Menu.sub_allPlayers33:SetTitle(nTitle)
     for k,v in pairs(_Admin.jSelected)do
-        local description = ("~c~~y~job_name ~s~\t: \t"..jName..'\n~c~~y~job_label ~s~\t: \t'..nTitle..'\n~c~~y~grade ~s~\t\t: \t'..v.grade..'\n~c~~y~grade_label ~s~\t: \t'..v.label..'\n~c~~y~salary ~s~\t\t: \t~g~'..v.salary..'$')
-        RageUI.Button(v.label, description, {RightLabel = "~c~→→→"}, true, {
-            onSelected = function() -- GetPlayerServerId(localId)
-                _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.label.."]")
-                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.label.."]")
-                TriggerServerEvent(_Admin.Prefix.."setJob", 2, GetPlayerServerId(localId), _Admin.jobName, v.grade, nTitle, v.label)
-                ESX.ShowNotification("Vous avez ~y~setJob~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.label)
-            end
-        });
+        if v.grade_label == nil then else
+            local description = ("~c~~y~job_name ~s~\t: \t"..jName..'\n~c~~y~job_label ~s~\t: \t'..nTitle..'\n~c~~y~grade ~s~\t\t: \t'..v.job_grade..'\n~c~~y~grade_label ~s~\t: \t'..v.grade_label..'\n~c~~y~salary ~s~\t\t: \t~g~'..v.salary..'$')
+            RageUI.Button(v.grade_label, description, {RightLabel = "~c~→→→"}, true, {
+                onSelected = function() -- GetPlayerServerId(localId)
+                    if _Admin.Config.DoubleJob == 'fbase' then
+                        local wut = KI("Ecrivez : job / job2", "", 25)
+                        if wut ~= nil and type(wut) == "string" then
+                            if wut == 'job' then
+                                _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                ESX.ShowNotification("Vous avez ~y~setJob~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
+                            elseif wut == 'job2' then
+                                _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                ESX.ShowNotification("Vous avez ~y~setJob2~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
+                            end
+                            TriggerServerEvent(_Admin.Prefix.."setJob", 2, GetPlayerServerId(localId), jName, v.job_grade, nTitle, v.grade_label, tostring(wut))
+                        end
+                    elseif _Admin.Config.DoubleJob == false then
+                        _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                        _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                        ESX.ShowNotification("Vous avez ~y~setJob~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
+                        TriggerServerEvent(_Admin.Prefix.."setJob", 2, GetPlayerServerId(localId), jName, v.job_grade, nTitle, v.grade_label)   
+                    end
+                end
+            });
+        end
     end
 end

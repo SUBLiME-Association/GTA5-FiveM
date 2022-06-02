@@ -134,11 +134,87 @@ ESX.RegisterServerCallback(_Admin.Prefix.."GetAdminName", function(source,cb)
     cb(xPlayer.getName())
 end)
 
-ESX.RegisterServerCallback(_Admin.Prefix..'Get:Jobs-Factions', function(source, cb)
+
+ESX.RegisterServerCallback(_Admin.Prefix.."GetAllPlayersOnline", function(source,cb)
     local data = {}
-    data.jobs = ESX.GetJobs()
-    --if Config.SetFaction then
-    --    data.factions = ESX.GetFactions()
-    --end
+    local players = ESX.GetExtendedPlayers()
+    for _,v in pairs(players)do
+        data[#data+1] = v
+    end
     cb(data)
 end)
+
+
+if _Admin.Config.DoubleJob == true then
+    CreateThread(function()
+        while true do
+            Wait(3500)
+            print("VEUILLEZ REMETTRE Config.DoubleJob SUR FALSE ou 'fbase' SI VOUS UTILISEZ ESX-LEGACY DE FELLOW, ACTUELLEMENT NON DISPONIBLE SUR TRUE")
+        end
+    end)
+elseif _Admin.Config.DoubleJob == 'fbase' or _Admin.Config.DoubleJob == false then
+    ESX.RegisterServerCallback(_Admin.Prefix.."GetAllJobsGrades", function(source,cb)
+        local query = "SELECT jobs.name AS `job_name`, jobs.label AS `job_label`, job_grades.grade, job_grades.name AS `grade_name`, job_grades.label AS `grade_label`, job_grades.salary AS `salary` FROM jobs,job_grades WHERE jobs.name = job_grades.job_name"
+        local data = {}
+        local job = {}
+        if _Admin.SQLWrapperType == 1 then 
+            MySQL.Async.fetchAll(query, {}, function(result)
+                if result ~= nil then
+                    for k,v in pairs(result)do
+                        job[v.job_name] = {}
+                        job[v.job_name].label = v.job_label
+                        data[#data+1] = {
+                            job_grade = v.grade,
+                            job_name = v.job_name,
+                            grade_name = v.grade_name,
+                            grade_label = v.grade_label,
+                            salary = v.salary
+                        }
+                    end
+                    for i = 1, #data do
+                        if job[data[i].job_name] then
+                            table.insert(job[data[i].job_name], {
+                                grade_label = data[i].grade_label, job_grade = data[i].job_grade, grade_name = data[i].grade_name, salary = data[i].salary
+                            })
+                        end
+                    end
+                    cb(job)
+                end
+            end)
+        else
+            MySQL.query(query, {}, function (result)
+                if result ~= nil then
+                    for k,v in pairs(result)do
+                        job[v.job_name] = {}
+                        job[v.job_name].label = v.job_label
+                        data[#data+1] = {
+                            job_grade = v.grade,
+                            job_name = v.job_name,
+                            grade_name = v.grade_name,
+                            grade_label = v.grade_label,
+                            salary = v.salary
+                        }
+                    end
+                    for i = 1, #data do
+                        if job[data[i].job_name] then
+                            table.insert(job[data[i].job_name], {
+                                grade_label = data[i].grade_label, job_grade = data[i].job_grade, grade_name = data[i].grade_name, salary = data[i].salary
+                            })
+                        end
+                    end
+                    cb(job)
+                end
+            end)
+        end
+    end)
+--elseif _Admin.Config.DoubleJob == false then
+--    ESX.RegisterServerCallback(_Admin.Prefix..'Get:Jobs-Factions', function(source, cb)
+--        local data = {}
+--        data.jobs = ESX.GetJobs()
+--        --if Config.SetFaction then
+--        --    data.factions = ESX.GetFactions()
+--        --end
+--        cb(data)
+--    end)
+end
+

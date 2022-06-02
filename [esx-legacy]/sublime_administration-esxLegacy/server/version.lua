@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.3",
-    "changelog": "\n\t- Correction du noms des joueurs en ligne (prends identity si es_extended connfig.identity = true\n\t- Ajout du setJob joueur en ligne\n\t- Ajout du setJob player option\n\t- Modification du bouton revive joeur en ligne, passe par la commande esx /revive de esx_ambulancejob (possible de desactiver dans le config pour un revive standalone)",
+    "version": "1.4",
+    "changelog": "^2\n\t- Correction de l'ensemble des bugs depuis suivant la version 1.3 & 1.2,^2\n\t- La fonctionnalité setJob est désormé compatible avec la fbase (esx-legacy de fellow voir shared/config.lua),^2\n\t- Désormai tout les grades sont dans l'ordre",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
