@@ -10,9 +10,9 @@ function Sublime:RandomString(lenght)
     local upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     local lowerCase = "abcdefghijklmnopqrstuvwxyz"
     local numbers = "0123456789"
-    local symbols = "!@#$%&()*+-,./:;<=>?^[]{}"
+    --local symbols = "!@#$%&()*+-,./:;<=>?^[]{}"
     
-    local characterSet = upperCase .. lowerCase .. numbers .. symbols
+    local characterSet = upperCase .. lowerCase .. numbers
     
     local keyLength = lenght
     local output = ""

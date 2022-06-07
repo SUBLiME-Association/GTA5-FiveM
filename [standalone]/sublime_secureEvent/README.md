@@ -1,3 +1,6 @@
+# WORK IN PROGRESS, DON'T USE IT!!!!!!!!!!!
+
+
 # sublime_secureEvent
 C'est un script standalone pour sécurisé ses event sur FiveM
 
