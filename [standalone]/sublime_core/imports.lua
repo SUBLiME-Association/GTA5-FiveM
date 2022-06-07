@@ -1,0 +1,1 @@
+sCore = exports['sublime_core']:GetCoreObject()
