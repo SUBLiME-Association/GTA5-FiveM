@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
-version '1.4'
+version '1.4.1'
 
 
 client_scripts {
@@ -30,6 +30,7 @@ server_scripts {
 }
 
 client_scripts {
+    'cache/*lua',
     'client/fonction\'s/*.lua',
     'client/menu\'s/**/*.lua'
 }

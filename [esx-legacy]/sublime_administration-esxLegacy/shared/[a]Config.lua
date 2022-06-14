@@ -25,7 +25,7 @@ _Admin.Config = {
     --
     DoubleJob = false, -- false ou 'fbase' (fbase = doublejob qui passe sur la meme fonction ESX.DoesJobExist)
     --
-    SQL_Wrapper = "oxmysql", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
+    SQL_Wrapper = "mysql", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
     --
     Macro = {
         ['Open Main Menu'] = {btn = 'F10', description = "~r~Open Admin Panel~s~"}, --> Open panel

@@ -1,23 +1,23 @@
 
 
 function _Admin.DeveloppementMod()
-    local pCoords = GetEntityCoords(PlayerPedId())
-    local pHeading = GetEntityHeading(PlayerPedId())
+    local pCoords = GetEntityCoords(cache.playerPedId)
+    local pHeading = GetEntityHeading(cache.playerPedId)
 
     -- Obj
-    local closestObject, distance = ESX.Game.GetClosestObject( GetEntityCoords(PlayerPedId()) )
+    local closestObject, distance = ESX.Game.GetClosestObject( GetEntityCoords(cache.playerPedId) )
     _Admin.Laser.DrawEntityBoundingBox(closestObject, {r = 0, g = 255, b = 0, a = 200})
     local entityObject = GetEntityCoords(closestObject)
     _Admin.Laser.DrawText3D(entityObject.x, entityObject.y, entityObject.z, "Obj: " .. closestObject .. " Model: " .. GetEntityModel(closestObject).. "", 2)
 
     --Vehicle
-    local closestVehicle, distance = ESX.Game.GetClosestVehicle( GetEntityCoords(PlayerPedId()) )
+    local closestVehicle, distance = ESX.Game.GetClosestVehicle( GetEntityCoords(cache.playerPedId) )
     _Admin.Laser.DrawEntityBoundingBox(closestVehicle, {r = 0, g = 255, b = 0, a = 200})
     local entityVehicle = GetEntityCoords(closestVehicle)
     _Admin.Laser.DrawText3D(entityVehicle.x, entityVehicle.y, entityVehicle.z, "Obj: " .. closestVehicle .. " Model: " .. GetEntityModel(closestVehicle).. "", 2)
 
     --Peds
-    local closestPeds, distance = ESX.Game.GetClosestPed( GetEntityCoords(PlayerPedId()) )
+    local closestPeds, distance = ESX.Game.GetClosestPed( GetEntityCoords(cache.playerPedId) )
     _Admin.Laser.DrawEntityBoundingBox(closestPeds, {r = 0, g = 255, b = 0, a = 200})
     local entityPeds = GetEntityCoords(closestPeds)
     _Admin.Laser.DrawText3D(entityPeds.x, entityPeds.y, entityPeds.z, "Obj: " .. closestPeds .. " Model: " .. GetEntityModel(closestPeds).. "", 2)

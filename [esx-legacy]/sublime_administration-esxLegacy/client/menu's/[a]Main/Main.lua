@@ -10,7 +10,7 @@ local _ = {
 function _Admin.Panel:Main(rank)
     _.rank = rank
     _Admin.Menu.Create()
-    _Admin.GetAllPlayersOnline()
+    RefreshPlayersCallback()
     _Admin.RefreshAllItems()
     _Admin.RefreshSublimeData()
     _Admin.RefreshBans()
@@ -21,7 +21,7 @@ function _Admin.Panel:Main(rank)
         
         RageUI.IsVisible(_Admin.Menu.main, function()
 
-            RageUI.Button('Joueurs Connectés', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_PlayerConnected.access), {onSelected = function() _Admin.GetAllPlayersOnline() end}, _Admin.Menu.sub_allPlayers);
+            RageUI.Button('Joueurs Connectés', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_PlayerConnected.access), {onSelected = function() RefreshPlayersCallback() end}, _Admin.Menu.sub_allPlayers);
 
             RageUI.Button('Mon Personnage', nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Button_myPlayer.access), {}, _Admin.Menu.sub_myPlayer);
 
@@ -41,7 +41,7 @@ function _Admin.Panel:Main(rank)
         end)
 
         RageUI.IsVisible(_Admin.Menu.sub_allPlayers2, function()
-            _Admin.Panel:PlayerDetails(_.rank, _Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.AdminName)
+            _Admin.Panel:PlayerDetails(_.rank, _Admin.TargetId, _Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.TargetJobLabel, _Admin.TargetJobGradeLabel)
         end)
         
         RageUI.IsVisible(_Admin.Menu.sub_myPlayer, function()
@@ -131,7 +131,7 @@ function _Admin.Panel:Main(rank)
         end)
 
         RageUI.IsVisible(_Admin.Menu.sub_allPlayers33, function() -- JOB ALL PLAYERS 2
-            _Admin.Panel:PlayerDetailsJobs2(_.rank, _Admin.newMenuTitle, _Admin.jobName, _Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.AdminName)
+            _Admin.Panel:PlayerDetailsJobs2(_.rank, _Admin.newMenuTitle, _Admin.jobName, _Admin.TargetId ,_Admin.SelectedPlayerLocalId, _Admin.SelectedPlayerName, _Admin.AdminName)
         end)
 
         --RageUI.IsVisible(_Admin.Menu.sub_allPlayers4, function() -- FACTION ALL PLAYERS 1

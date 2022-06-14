@@ -10,12 +10,12 @@ local _ = {
 }
 
 
-function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
+
+function _Admin.Panel:PlayerDetails(rank, serverId, localId, name, jobName, gradeName)
     _.rank = rank
     local _name = tostring(name)
-    _Admin.Menu.sub_allPlayers2:SetTitle(GetPlayerName(localId))
-    RageUI.Separator("~c~NOM :~s~ ~h~".._name)
-    RageUI.Separator("~c~ID :~s~ ~h~"..GetPlayerServerId(localId))
+    RageUI.Separator("~c~NOM :~s~ ~h~".._name.."~r~ | ~c~ID :~s~ ~h~"..serverId)
+    RageUI.Separator("~c~JOB :~s~ ~h~"..jobName.."~r~ | ~c~GRADE :~s~ ~h~"..gradeName)
     RageUI.Line()
 
     RageUI.Button("SetJob", "Attribuer un job au joueur", {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _Admin.Permissions.SetJob), {}, _Admin.Menu.sub_allPlayers3);
@@ -26,18 +26,18 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
         onSelected = function()
             local targetCoords = GetEntityCoords(GetPlayerPed(localId))
             Citizen.CreateThread(function()
-                _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Goto → [^5".._name.."^7]")
-                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Goto → [".._name.."]")
-                ESX.Game.Teleport(PlayerPedId(), targetCoords)
+                _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Goto → [^5".._name.."^7]")
+                _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Goto → [".._name.."]")
+                ESX.Game.Teleport(cache.playerPedId, targetCoords)
             end)
         end
     });
 
     RageUI.Button("Bring", "Téléporter le joueur sur sois même", {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Bring), {
         onSelected = function()
-            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Bring → [^5".._name.."^7]")
-            _Admin.SendServerLogs("[^1".._.rank.name.." - "..aName.."] Bring → [".._name.."]")
-            TriggerServerEvent(_Admin.Prefix.."bring", GetPlayerServerId(localId))
+            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Bring → [^5".._name.."^7]")
+            _Admin.SendServerLogs("[^1".._.rank.name.." - "..cache.playerName.."] Bring → [".._name.."]")
+            TriggerServerEvent(_Admin.Prefix.."bring", serverId, 1)
         end
     });
 
@@ -45,10 +45,10 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
         onSelected = function()
             local msg = KI("Message", "", 150)
             if msg ~= nil and msg ~= "" then
-                local mugshot, mugshotStr = ESX.Game.GetPedMugshot(PlayerPedId())
-                _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Message privé → [^5".._name.."^7] Message : ^6"..msg.."^7")
-                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Message privé → [".._name.."] Message : "..msg)
-                TriggerServerEvent(_Admin.Prefix.."sendPrivateNotification", GetPlayerServerId(localId), msg, mugshotStr)
+                local mugshot, mugshotStr = ESX.Game.GetPedMugshot(cache.playerPedId)
+                _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Message privé → [^5".._name.."^7] Message : ^6"..msg.."^7")
+                _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Message privé → [".._name.."] Message : "..msg)
+                TriggerServerEvent(_Admin.Prefix.."sendPrivateNotification", serverId, msg, mugshotStr)
                 UnregisterPedheadshot(mugshot)
             end
         end
@@ -72,8 +72,8 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
     
     RageUI.Button("Soigné", nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Heal), {
         onSelected = function()
-            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Soigné → [^5".._name.."^7]")
-            _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Soigné → [".._name.."]")
+            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Soigné → [^5".._name.."^7]")
+            _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Soigné → [".._name.."]")
             SetEntityHealth((GetPlayerPed(localId)),  GetEntityMaxHealth((GetPlayerPed(localId))))
             ESX.ShowNotification("Vous avez soigné ~g~".._name)
         end
@@ -81,21 +81,23 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
 
     RageUI.Button("Revive", nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Revive), {
         onSelected = function()
-            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Revive → [^5".._name.."^7]")
-            _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Revive → [".._name.."]")
+            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Revive → [^5".._name.."^7]")
+            _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Revive → [".._name.."]")
             if _Admin.Config.Revive.enable then
-                ExecuteCommand(_Admin.Config.Revive.command..GetPlayerServerId(localId)) --playerId
+                ExecuteCommand(_Admin.Config.Revive.command..serverId) --playerId
             else
-                TriggerServerEvent(_Admin.Prefix.."revivePlayer", GetPlayerServerId(localId))
+                TriggerServerEvent(_Admin.Prefix.."revivePlayer", serverId)
             end
         end
     });
 
     RageUI.Button("Tuer",  nil, {RightLabel = "~c~→→→"}, _Admin:HaveAccess(_.rank, _.aPerms.Kill), {
         onSelected = function()
-            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Tuer → [^5".._name.."^7]")
-            _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Tuer → [".._name.."]")
+            _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Tuer → [^5".._name.."^7]")
+            _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Tuer → [".._name.."]")
             SetEntityHealth(GetPlayerPed(localId), 0)
+            TriggerServerEvent(_Admin.Prefix.."bring", serverId , 2)
+
             ESX.ShowNotification("Vous avez tuer ~g~".._name)
         end
     });
@@ -104,8 +106,8 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
         onSelected = function()
             local kickreason = KI("Kick raison", "", 150)
             if kickreason ~= nil and kickreason ~= "" then
-                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Kick → [".._name.."] Raison : "..kickreason)
-                TriggerServerEvent(_Admin.Prefix.."kickPlayer", _.rank, GetPlayerServerId(localId), kickreason)
+                _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Kick → [".._name.."] Raison : "..kickreason)
+                TriggerServerEvent(_Admin.Prefix.."kickPlayer", _.rank, serverId, kickreason)
             end
         end
     });
@@ -119,8 +121,8 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
                 if banTime > 0 and banTime < 365 then
                     local banReason = KI("Ban raison", "", 150)
                     if banReason ~= nil and banReason ~= "" then
-                        TriggerServerEvent(_Admin.Prefix.."banPlayer", _.rank, _name, GetPlayerServerId(localId), banTime, banReason)
-                        _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Ban → [".._name.."] Raison : "..banReason.." pour "..banTime.." jour")
+                        TriggerServerEvent(_Admin.Prefix.."banPlayer", _.rank, _name, serverId, banTime, banReason)
+                        _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Ban → [".._name.."] Raison : "..banReason.." pour "..banTime.." jour")
                     end
                 else
                     ESX.ShowNotification("~r~Quantité invalide")
@@ -141,9 +143,9 @@ function _Admin.Panel:PlayerDetails(rank, localId, name, aName)
                 rankNumber = ESX.Math.Round(rankNumber)
                 for k,v in pairs(_Admin.Ranks) do 
                     if v.grade == rankNumber then
-                        _Admin.Print("[^1".._.rank.name.." ^7- ^2"..aName.."^7] Ajouter des permissions → [^5".._name.."^7] Rank Grade : ^6"..rankNumber.."^7")
-                        _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] Ajouter des permissions → [".._name.."] Rank Grade : "..rankNumber)
-                        TriggerServerEvent(_Admin.Prefix.."SetAdminPermissions", _.rank, GetPlayerServerId(localId), rankNumber)
+                        _Admin.Print("[^1".._.rank.name.." ^7- ^2"..cache.playerName.."^7] Ajouter des permissions → [^5".._name.."^7] Rank Grade : ^6"..rankNumber.."^7")
+                        _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] Ajouter des permissions → [".._name.."] Rank Grade : "..rankNumber)
+                        TriggerServerEvent(_Admin.Prefix.."SetAdminPermissions", _.rank, serverId, rankNumber)
                     end
                 end
             else
@@ -166,7 +168,7 @@ function _Admin.Panel:PlayerDetailsJobs1(Jobs)
     end
 end
 
-function _Admin.Panel:PlayerDetailsJobs2(rank, nTitle, jName, localId, name, aName)
+function _Admin.Panel:PlayerDetailsJobs2(rank, nTitle, jName, serverId, localId, name)
     _.rank = rank
     local _name = tostring(name)
     _Admin.Menu.sub_allPlayers33:SetTitle(nTitle)
@@ -174,26 +176,26 @@ function _Admin.Panel:PlayerDetailsJobs2(rank, nTitle, jName, localId, name, aNa
         if v.grade_label == nil then else
             local description = ("~c~~y~job_name ~s~\t: \t"..jName..'\n~c~~y~job_label ~s~\t: \t'..nTitle..'\n~c~~y~grade ~s~\t\t: \t'..v.job_grade..'\n~c~~y~grade_label ~s~\t: \t'..v.grade_label..'\n~c~~y~salary ~s~\t\t: \t~g~'..v.salary..'$')
             RageUI.Button(v.grade_label, description, {RightLabel = "~c~→→→"}, true, {
-                onSelected = function() -- GetPlayerServerId(localId)
+                onSelected = function() -- serverId
                     if _Admin.Config.DoubleJob == 'fbase' then
                         local wut = KI("Ecrivez : job / job2", "", 25)
                         if wut ~= nil and type(wut) == "string" then
                             if wut == 'job' then
-                                _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
-                                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.Print("[".._.rank.name.." - "..cache.playerName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
                                 ESX.ShowNotification("Vous avez ~y~setJob~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
                             elseif wut == 'job2' then
-                                _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
-                                _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.Print("[".._.rank.name.." - "..cache.playerName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                                _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] SetJob2 -> [".._name.." - "..jName.." | "..v.grade_label.."]")
                                 ESX.ShowNotification("Vous avez ~y~setJob2~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
                             end
-                            TriggerServerEvent(_Admin.Prefix.."setJob", 2, GetPlayerServerId(localId), jName, v.job_grade, nTitle, v.grade_label, tostring(wut))
+                            TriggerServerEvent(_Admin.Prefix.."setJob", 2, serverId, jName, v.job_grade, nTitle, v.grade_label, tostring(wut))
                         end
                     elseif _Admin.Config.DoubleJob == false then
-                        _Admin.Print("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
-                        _Admin.SendServerLogs("[".._.rank.name.." - "..aName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                        _Admin.Print("[".._.rank.name.." - "..cache.playerName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
+                        _Admin.SendServerLogs("[".._.rank.name.." - "..cache.playerName.."] SetJob -> [".._name.." - "..jName.." | "..v.grade_label.."]")
                         ESX.ShowNotification("Vous avez ~y~setJob~s~ : \n- ~c~".._name.."\n~s~- ~g~"..nTitle.." ~s~|~b~ "..v.grade_label)
-                        TriggerServerEvent(_Admin.Prefix.."setJob", 2, GetPlayerServerId(localId), jName, v.job_grade, nTitle, v.grade_label)   
+                        TriggerServerEvent(_Admin.Prefix.."setJob", 2, serverId, jName, v.job_grade, nTitle, v.grade_label)   
                     end
                 end
             });

@@ -137,9 +137,29 @@ end)
 
 ESX.RegisterServerCallback(_Admin.Prefix.."GetAllPlayersOnline", function(source,cb)
     local data = {}
+    local inventory
     local players = ESX.GetExtendedPlayers()
     for _,v in pairs(players)do
-        data[#data+1] = v
+        for i = 1, #v.inventory do
+            if v.inventory[i].count > 0 then
+                inventory[#inventory+1] = {
+                    name = v.inventory[i].name,
+                    count = v.inventory[i].count,
+                    label = v.inventory[i].label,
+                    weight = v.inventory[i].weight,
+                } 
+            end
+        end
+        data[#data+1] = {
+            serverId = v.playerId,
+            gtaName = GetPlayerName(v.playerId),
+            playerName = v.name,
+            jobLabel = v.job.label,
+            jobGrade = v.job.grade,
+            jobGradeLabel = v.job.grade_label,
+            jobSalary = v.job.salary,
+            inventory = inventory,
+        }
     end
     cb(data)
 end)

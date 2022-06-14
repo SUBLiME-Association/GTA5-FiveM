@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.4",
-    "changelog": "^2\n\t- Correction de l'ensemble des bugs depuis suivant la version 1.3 & 1.2,^2\n\t- La fonctionnalité setJob est désormé compatible avec la fbase (esx-legacy de fellow voir shared/config.lua),^2\n\t- Désormai tout les grades sont dans l'ordre",
+    "version": "1.4.1",
+    "changelog": "^2\n\t- Optimisation et mise en cache de la liste de joueur en ligne,^2\n\t- Mise en cache des identifiant client,^2\n\t- Visibilité du job/grade sur le joueur sélectionné dans la liste,^2\n\t- Ajout d'un bouton dans la liste de joueur pour refresh la liste et le cache,^2\n\t- Suppression de la fonction ESX.GetConfig().identity (donc les joueur qui l'ont sur false auront nil en nom ESX et auront que le nom via la native),^2\n\t- La facon de tuer un joueur selectionnée a changé provisoirement suite à un défaut de sync via le serveur,^2\n\t- Correction sur le bring le player selectionnée",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 

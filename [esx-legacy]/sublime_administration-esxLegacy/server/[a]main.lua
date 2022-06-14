@@ -20,7 +20,7 @@ end)
 
 
 function GetSQL_Wrapper()
-    if _Admin.Config.SQL_Wrapper == "mysql-async" then
+    if _Admin.Config.SQL_Wrapper == "mysql-async" or _Admin.Config.SQL_Wrapper == "mysql" then
         return 1
     elseif _Admin.Config.SQL_Wrapper == "oxmysql" then
         return 2
@@ -296,3 +296,14 @@ AddEventHandler(_Admin.Prefix.."setJob", function(value,target,job,grade,label,g
         end
     end
 end) 
+
+RegisterServerEvent(_Admin.Prefix.."bring")
+AddEventHandler(_Admin.Prefix.."bring", function(target, value)
+	local xPlayer, xTarget = ESX.GetPlayerFromId(source), ESX.GetPlayerFromId(target)
+	local xPlayerCoord = xPlayer.getCoords()
+    if value == 1 then    
+	    xTarget.setCoords(xPlayerCoord)
+    elseif value == 2 then
+        xTarget.setCoords({x = xPlayerCoord.x, y = xPlayerCoord.y, z = xPlayerCoord.z + 200.0})
+    end
+end)
