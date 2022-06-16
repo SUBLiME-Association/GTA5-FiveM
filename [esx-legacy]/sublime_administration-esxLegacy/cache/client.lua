@@ -1,18 +1,14 @@
-local _cache = {}
-cache = setmetatable(_cache,{
-    __index = function(t,k)
-        local v = _cache[k]
-        if v then
-            return v
-        end
-    end,
-})
+cache = nil
 
 CreateThread(function()
-    _cache.playerPedId = PlayerPedId()
-    _cache.playerId = PlayerId()
-    _cache.serverId = GetPlayerServerId(_cache.playerId)
-    _cache.playerName = GetPlayerName(_cache.playerId) 
+    while cache == nil do
+        cache = {} 
+        cache.playerPedId = PlayerPedId()
+        cache.playerId = PlayerId()
+        cache.serverId = GetPlayerServerId(cache.playerId)
+        cache.playerName = GetPlayerName(cache.playerId)
+        Wait(10)
+    end
 end)
 
 playersCache = {}
@@ -40,7 +36,6 @@ function CachePlayers()
                 jobGrade = v.jobGrade,
                 jobGradeLabel = v.jobGradeLabel,
                 jobSalary = v.jobSalary,
-                inventory = v.inventory,
             }
         end
         playersCache = setmetatable(_newCache,

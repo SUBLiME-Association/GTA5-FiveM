@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.4.1",
-    "changelog": "^2\n\t- Optimisation et mise en cache de la liste de joueur en ligne,^2\n\t- Mise en cache des identifiant client,^2\n\t- Visibilité du job/grade sur le joueur sélectionné dans la liste,^2\n\t- Ajout d'un bouton dans la liste de joueur pour refresh la liste et le cache,^2\n\t- Suppression de la fonction ESX.GetConfig().identity (donc les joueur qui l'ont sur false auront nil en nom ESX et auront que le nom via la native),^2\n\t- La facon de tuer un joueur selectionnée a changé provisoirement suite à un défaut de sync via le serveur,^2\n\t- Correction sur le bring le player selectionnée",
+    "version": "1.4.2",
+    "changelog": "^2\n\t- Légère correction du système de cache client qui chargé pas pour le DeveloppementMod, ^2\n\t- Suppression de l'inventory dans le cache de la liste de joueur pour la prochaine features qui est useless.",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
