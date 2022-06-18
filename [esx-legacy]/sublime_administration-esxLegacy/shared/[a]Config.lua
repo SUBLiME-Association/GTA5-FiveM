@@ -5,7 +5,7 @@ _Admin.Panel = _Admin.Panel or {}
 --| ESX Legacy Version & RageUI Library
 
 _Admin.MainUser = {
-    "3ec9bce5eb7535d3878b70bc3aad0d48fb307b18"; -- "license"
+    "3ec9bce5eb7535d3878b70bc3aad0d48fb307b18", -- "license", ou ce que vous retourne xPlayer.identifier si vous avez modifié es_extended pour que la fonction vous retourne le steamID par exemple
 }
 
 

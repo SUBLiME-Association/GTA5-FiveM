@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.4.2",
-    "changelog": "^2\n\t- Légère correction du système de cache client qui chargé pas pour le DeveloppementMod, ^2\n\t- Suppression de l'inventory dans le cache de la liste de joueur pour la prochaine features qui est useless.",
+    "version": "1.4.3",
+    "changelog": "^2\n\t- Correction sur la vérification des Owners, vous pouvez à présent être plusieurs Owners dans la table : _Admin.MainUser",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 

@@ -1,9 +1,12 @@
-
-
 ESX.RegisterServerCallback(_Admin.Prefix.."OwnerPermissions", function(source, cb, type)
     local xPlayer = ESX.GetPlayerFromId(source)
-    local checkPerms = _Admin.CheckOwnerPermissions(xPlayer)
-    if checkPerms then
+    local found = false
+    for _,v in ipairs(_Admin.MainUser) do
+        if v == xPlayer.identifier then
+            found = true
+        end
+    end
+    if found then
         cb(true)
     else
         cb(false)
@@ -20,19 +23,6 @@ ESX.RegisterServerCallback(_Admin.Prefix.."CheckStaffPermissions", function(sour
         cb(result)
     end
 end)
-
-
-
-
-function _Admin.CheckOwnerPermissions(xPlayer)
-    for _,v in ipairs(_Admin.MainUser) do
-        if v == xPlayer.identifier then
-            return true
-        else
-            return false
-        end
-    end
-end
 
 
 
