@@ -6,8 +6,8 @@ local Version =
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.4.3",
-    "changelog": "^2\n\t- Correction sur la vérification des Owners, vous pouvez à présent être plusieurs Owners dans la table : _Admin.MainUser",
+    "version": "1.4.4",
+    "changelog": "^2\n\t- 1.4.3 : Correction sur la vérification des Owners, vous pouvez à présent être plusieurs Owners dans la table : _Admin.MainUser,^2\n\t- 1.4.4 : Rajout de la fonction de base CheckOwner pour d'autre fonction qui l'utilisé sans problème,^2\n\t- 1.4.4 : Changement sur le fichier .sql suite au varchar sur l'identifier trop court pour cetaine licence rockstar.",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
