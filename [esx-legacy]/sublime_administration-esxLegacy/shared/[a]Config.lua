@@ -47,6 +47,7 @@ _Admin.Config = {
             goForward = 32,  -- Z
             goBackward = 33, -- S
         },
+        ControlsHeadingWithMouse = true, -- Allow to turn left/right with mouse pointing
         Speeds = { 0, 0.5, 2, 5, 10, 15 },
         Offsets = {y = 0.5, z = 0.2, h = 3},
     },
