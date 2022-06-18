@@ -9,16 +9,27 @@ local vitesse = "0"
 
 function _Admin.NoClip()
 	while _Admin.NoClipStatus do
-		SetIButtons({
-			{GetControlInstructionalButton(1,_Admin.Keys["Z"],0),"Avancer"},
-			{GetControlInstructionalButton(1,_Admin.Keys["S"],0),"Reculé"},
-			{GetControlInstructionalButton(1,_Admin.Keys["Q"],0),"Gauche"},
-			{GetControlInstructionalButton(1,_Admin.Keys["D"],0),"Droite"},
-			{GetControlInstructionalButton(1,_Admin.Keys["A"],0),"Monter"},
-			{GetControlInstructionalButton(1,_Admin.Keys["W"],0),"Descendre"},
-			{GetControlInstructionalButton(1,_Admin.Keys["LEFTSHIFT"],0), vitesse},
+		if _Admin.Config.NoClip.ControlsHeadingWithMouse then
+			SetIButtons({
+				{GetControlInstructionalButton(1,_Admin.Keys["Z"],0),"Avancer"},
+				{GetControlInstructionalButton(1,_Admin.Keys["S"],0),"Reculé"},
+				{GetControlInstructionalButton(1,_Admin.Keys["A"],0),"Monter"},
+				{GetControlInstructionalButton(1,_Admin.Keys["W"],0),"Descendre"},
+				{GetControlInstructionalButton(1,_Admin.Keys["LEFTSHIFT"],0), vitesse},
 
-		}, 0)
+			}, 0)
+		else
+			SetIButtons({
+				{GetControlInstructionalButton(1,_Admin.Keys["Z"],0),"Avancer"},
+				{GetControlInstructionalButton(1,_Admin.Keys["S"],0),"Reculé"},
+				{GetControlInstructionalButton(1,_Admin.Keys["Q"],0),"Gauche"},
+				{GetControlInstructionalButton(1,_Admin.Keys["D"],0),"Droite"},
+				{GetControlInstructionalButton(1,_Admin.Keys["A"],0),"Monter"},
+				{GetControlInstructionalButton(1,_Admin.Keys["W"],0),"Descendre"},
+				{GetControlInstructionalButton(1,_Admin.Keys["LEFTSHIFT"],0), vitesse},
+
+			}, 0)
+		end
 		DrawIButtons()
 		DisableAllControlActions()
 		EnableControlAction(0, 1, true)
@@ -54,7 +65,7 @@ function _Admin.NoClip()
 		local heading = GetEntityHeading(NoClipEntity)
 		SetEntityVelocity(NoClipEntity, 0.0, 0.0, 0.0)
 		SetEntityRotation(NoClipEntity, 0.0, 0.0, 0.0, 0, false)
-		if _Admin.Config.ControlsHeadingWithMouse then
+		if _Admin.Config.NoClip.ControlsHeadingWithMouse then
 			SetEntityHeading(NoClipEntity, GetGameplayCamRelativeHeading());
 		else
 			SetEntityHeading(NoClipEntity, heading);

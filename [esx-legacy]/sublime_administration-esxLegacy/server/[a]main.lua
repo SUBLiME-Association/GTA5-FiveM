@@ -297,13 +297,15 @@ AddEventHandler(_Admin.Prefix.."setJob", function(value,target,job,grade,label,g
     end
 end) 
 
-RegisterServerEvent(_Admin.Prefix.."bring")
-AddEventHandler(_Admin.Prefix.."bring", function(target, value)
+RegisterServerEvent(_Admin.Prefix.."teleport")
+AddEventHandler(_Admin.Prefix.."teleport", function(target, value)
 	local xPlayer, xTarget = ESX.GetPlayerFromId(source), ESX.GetPlayerFromId(target)
-	local xPlayerCoord = xPlayer.getCoords()
+	local xPlayerCoord, xTargetCoord = xPlayer.getCoords(), xTarget.getCoords()
     if value == 1 then    
 	    xTarget.setCoords(xPlayerCoord)
     elseif value == 2 then
         xTarget.setCoords({x = xPlayerCoord.x, y = xPlayerCoord.y, z = xPlayerCoord.z + 200.0})
+    elseif value == 3 then
+        xPlayer.setCoords(xTargetCoord)
     end
 end)

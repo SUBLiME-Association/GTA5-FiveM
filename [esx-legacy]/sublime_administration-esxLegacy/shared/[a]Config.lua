@@ -42,8 +42,8 @@ _Admin.Config = {
             goSprint = 21,-- Left Shift
             goUp = 85, -- A
             goDown = 48, -- W
-            turnLeft = 34, -- Q
-            turnRight = 35, -- D
+            turnLeft = 34, -- Q (Useles if ControlsHeadingWithMouse = true)
+            turnRight = 35, -- D (Useless if ControlsHeadingWithMouse = true)
             goForward = 32,  -- Z
             goBackward = 33, -- S
         },
