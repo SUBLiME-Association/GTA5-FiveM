@@ -43,3 +43,18 @@ exports['sublime_administration']:getCurrentWeather()
 -- Envoie un logs discord
 exports['sublime_administration']:sendLogs("message")
 ```
+
+# verifiez la collation de vos table/colonne sql
+
+afin d'éviter cette erreur : 
+
+exemple :
+```
+[  script:mysql-async] [MariaDB:10.3.34-MariaDB-0+deb10u1] [ERROR] [administration] An error happens for query "SELECT * FROM users, sublime_permissions WHERE users.identifier = sublime_permissions.identifier : []": ER_CANT_AGGREGATE_2COLLATIONS: Illegal mix of collations (utf8mb4_unicode_ci,IMPLICIT) and (utf8mb4_general_ci,IMPLICIT) for operation '='
+```
+
+```
+(utf8mb4_unicode_ci,IMPLICIT) and (utf8mb4_general_ci,IMPLICIT)
+```
+
+Veuillez bien mettre tout les collations identitque dans votre base de donnée, car ce script contient des requêtes sql "innerjoin"
