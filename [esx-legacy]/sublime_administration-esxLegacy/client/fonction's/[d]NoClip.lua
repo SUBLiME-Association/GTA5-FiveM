@@ -54,7 +54,11 @@ function _Admin.NoClip()
 		local heading = GetEntityHeading(NoClipEntity)
 		SetEntityVelocity(NoClipEntity, 0.0, 0.0, 0.0)
 		SetEntityRotation(NoClipEntity, 0.0, 0.0, 0.0, 0, false)
-		SetEntityHeading(NoClipEntity, heading);
+		if _Admin.Config.ControlsHeadingWithMouse then
+			SetEntityHeading(NoClipEntity, GetGameplayCamRelativeHeading());
+		else
+			SetEntityHeading(NoClipEntity, heading);
+		end	
 		SetEntityCoordsNoOffset(NoClipEntity, newPos.x, newPos.y, newPos.z, true, true, true)
 		SetLocalPlayerVisibleLocally(true);
 		Citizen.Wait(0)
