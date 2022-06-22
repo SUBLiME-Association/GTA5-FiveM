@@ -21,11 +21,17 @@ _Admin.Logs = {
 
 
 _Admin.Config = {
-    EnablePrints = true;
+    EnablePrints = true,
+    --
+    esx_vehicleshop = true, -- If you use script like it, export plate and vehicle in db
+    --
+    TypeWeight = 'kg',
+    --
+    TypeMoney = '$',
     --
     DoubleJob = false, -- false ou 'fbase' (fbase = doublejob qui passe sur la meme fonction ESX.DoesJobExist)
     --
-    SQL_Wrapper = "mysql", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
+    SQL_Wrapper = "oxmysql", --> mysql or oxmysql -- IMPORTANT (change in fxmanifest your dependencies)
     --
     Macro = {
         ['Open Main Menu'] = {btn = 'F10', description = "~r~Open Admin Panel~s~"}, --> Open panel

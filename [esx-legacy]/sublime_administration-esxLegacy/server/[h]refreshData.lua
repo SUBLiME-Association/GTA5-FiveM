@@ -226,3 +226,86 @@ elseif _Admin.Config.DoubleJob == 'fbase' or _Admin.Config.DoubleJob == false th
 --    end)
 end
 
+ESX.RegisterServerCallback(_Admin.Prefix.."GetInventoryTargetPlayers", function(source, cb, target)
+    local xTarget = ESX.GetPlayerFromId(target)
+    local getInventory = xTarget.getInventory()
+    local data, inventory = {}, {}
+    for i,v in ipairs (getInventory) do
+        if v.count > 0 then
+            inventory[#inventory+1] = {
+                name = v.name,
+                count = v.count,
+                label = v.label,
+                type = v.type,
+                usable = v.usable,
+                rare = v.rare,
+                limit = v.limit,
+                canremove = v.canremove
+            }
+        end 
+    end
+    data.inventory = inventory
+    data.weight = xTarget.getWeight()
+    data.maxWeight = ESX.GetConfig().MaxWeight
+
+    cb(data)
+end)
+
+ESX.RegisterServerCallback(_Admin.Prefix.."GetJobTargetPlayers", function(source, cb, target)
+    local xTarget = ESX.GetPlayerFromId(target)
+    local GetJob = xTarget.getJob()
+    local data = {}
+    data.job = GetJob.label
+    data.grade = GetJob.grade_label
+    cb(data)
+end)
+
+
+ESX.RegisterServerCallback(_Admin.Prefix.."GetAccountsTargetPlayers", function(source, cb, target)
+    local xTarget = ESX.GetPlayerFromId(target)
+    local GetAcoounts = xTarget.getAccounts()
+    cb(GetAcoounts)
+end)
+
+
+-- VEHICLE WIP
+ESX.RegisterServerCallback(_Admin.Prefix.."GetAllPlayersVehicle", function(source, cb, target)
+    local xTarget = ESX.GetPlayerFromId(target)
+    local query = "SELECT * FROM owned_vehicles WHERE owner = ? "
+    local vehicle = {}
+    if _Admin.SQLWrapperType == 1 then
+        MySQL.Async.fetchAll(query, {xTarget.identifier}, function(result)
+            if result ~= nil then
+                for k,v in pairs(result)do
+                    local data = json.decode(v.vehicle)
+                    vehicle[v.plate] = {}
+                    vehicle[v.plate].stored = v.stored
+                    vehicle[v.plate].data = data
+                    for k,v2 in pairs(vehicle[v.plate].data) do
+                        if k == 'model' then
+                            vehicle[v.plate].model = v2
+                        end
+                    end
+                end
+                cb(vehicle)
+            end
+        end)
+    else
+        MySQL.query(query, {xTarget.identifier}, function(result)
+            if result ~= nil then
+                for k,v in pairs(result)do
+                    local data = json.decode(v.vehicle)
+                    vehicle[v.plate] = {}
+                    vehicle[v.plate].stored = v.stored
+                    vehicle[v.plate].data = data
+                    for k,v2 in pairs(vehicle[v.plate].data) do
+                        if k == 'model' then
+                            vehicle[v.plate].model = v2
+                        end
+                    end
+                end
+                cb(vehicle)
+            end
+        end)
+    end
+end)

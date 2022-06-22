@@ -221,6 +221,7 @@ end
 
 _Admin.dataPlayers = {}
 _Admin.adminName = nil
+_Admin.TargetInventory, _Admin.TargetWeight, _Admin.TargetMaxWeight = {}, 0, 0
 
 function _Admin.GetAllPlayersOnline()
     ESX.TriggerServerCallback(_Admin.Prefix.."GetAllPlayersOnline", function(result)
@@ -229,4 +230,56 @@ function _Admin.GetAllPlayersOnline()
     ESX.TriggerServerCallback(_Admin.Prefix.."GetAdminName", function(result)
         _Admin.adminName = result
     end)
+end
+
+function _Admin.GetTargetInventory(target)
+    ESX.TriggerServerCallback(_Admin.Prefix.."GetInventoryTargetPlayers", function(data)
+        _Admin.TargetInventory = data.inventory
+        _Admin.TargetWeight = data.weight
+        _Admin.TargetMaxWeight = data.maxWeight
+        _Admin.TargetJob = data.job
+        --_Admin.TargetMoney = data.money
+    end, target)
+end
+
+_Admin.TargetJobLabel, _Admin.TargetGradeLabel = '', ''
+
+function _Admin.GetTargetJob(target)
+    ESX.TriggerServerCallback(_Admin.Prefix.."GetJobTargetPlayers", function(data)
+        _Admin.TargetJobLabel = data.job
+        _Admin.TargetGradeLabel = data.grade
+    end, target)
+end
+
+_Admin.TargetAccounts = {}
+
+function _Admin.GetTargetAccounts(target)
+    ESX.TriggerServerCallback(_Admin.Prefix.."GetAccountsTargetPlayers", function(data)
+        _Admin.TargetAccounts = data
+    end, target)
+end
+
+
+-- Vehicle
+
+_Admin.GetVehicleSQL = {}
+RegisterNetEvent(_Admin.Prefix.."Receive:GetAllVehicleSQL")
+AddEventHandler(_Admin.Prefix.."Receive:GetAllVehicleSQL", function(data)
+    _Admin.GetVehicleSQL = data
+end)
+
+_Admin.playersVehicleData = {}
+function _Admin.GetVehicleAllPlayers(xtarget)
+    
+    ESX.TriggerServerCallback(_Admin.Prefix..'GetAllPlayersVehicle', function(result)
+        _Admin.playersVehicleData = result
+    end, xtarget)
+end
+
+function _Admin.GetOwnerVehiclePedIsInPlate(vehicle, plate)
+    if string.match(vehicle, plate) then -- not (string.sub(vehicle, string.find(vehicle, plate))) == nil 
+        return true
+    else
+        return false
+    end
 end

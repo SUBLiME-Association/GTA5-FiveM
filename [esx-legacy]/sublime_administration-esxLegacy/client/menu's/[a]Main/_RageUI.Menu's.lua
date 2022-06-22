@@ -26,6 +26,8 @@ function _Admin.Menu.Create()
     _Admin.Menu.sub_ownerManagement = RageUI.CreateSubMenu(_Admin.Menu.main, cache.playerName, "ACTIONS DISPONIBLES");
     _Admin.Menu.sub_ownerManagementBans = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, cache.playerName, "LISTE DES BANS");
     _Admin.Menu.sub_ownerManagementStaff = RageUI.CreateSubMenu(_Admin.Menu.sub_ownerManagement, cache.playerName, "LISTE DES STAFF");
+
+    -- v 1.4
     _Admin.Menu.sub_allPlayers3 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, cache.playerName, "GESTION JOB")
     _Admin.Menu.sub_allPlayers33 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers3, "", "GESTION JOB - GRADE")
     --_Admin.Menu.sub_allPlayers4 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, cache.playerName, "GESTION FACTION")
@@ -34,4 +36,12 @@ function _Admin.Menu.Create()
     _Admin.Menu.sub_myPlayerOptions11 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions1, "", "GESTION JOB - GRADE")
     --_Admin.Menu.sub_myPlayerOptions2 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions, cache.playerName, "GESTION FACTION")
     --_Admin.Menu.sub_myPlayerOptions22 = RageUI.CreateSubMenu(_Admin.Menu.sub_myPlayerOptions2, "", "GESTION FACTION - GRADE")
+
+    -- v 1.5
+    _Admin.Menu.sub_allplayerInventory = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, cache.playerName, "GESTION - INVENTORY")
+    _Admin.Menu.sub_allplayerAccounts = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, cache.playerName, "GESTION - ACCOUNTS")
+    _Admin.Menu.sub_allPlayers5 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers2, cache.playerName, "LISTE DES VEHICULES")
+    _Admin.Menu.sub_allPlayers51 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers5, cache.playerName, "CATEGORIE - VEHICULES")
+    _Admin.Menu.sub_allPlayers55 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers5, "", "ACTION SUR LE VEHICULE")
+    _Admin.Menu.sub_allPlayers555 = RageUI.CreateSubMenu(_Admin.Menu.sub_allPlayers55, "", "TRANSFEREZ LE VEHICULE A")
 end

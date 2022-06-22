@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
-version '1.4.5'
+version '1.5.0'
 
 
 client_scripts {
@@ -24,8 +24,8 @@ shared_scripts {
 }
 
 
-server_scripts {
-    '@mysql-async/lib/MySQL.lua', -- or '@oxmysql/lib/MySQL.lua',
+server_scripts { --'@mysql-async/lib/MySQL.lua' or '@oxmysql/lib/MySQL.lua', + shared/config.lua -> _Admin.Config.SqlWrapper  
+    '@oxmysql/lib/MySQL.lua', -- here
     'server/*.lua'
 }
 

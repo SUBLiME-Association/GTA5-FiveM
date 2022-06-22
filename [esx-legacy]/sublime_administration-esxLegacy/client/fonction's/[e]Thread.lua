@@ -121,11 +121,17 @@ CreateThread(function() --> spécial précharge pour Admin les Callback lourd 1x
             local rank = { name = "Owner", grade = "Owner" }
             if _Admin:HaveAccess(rank, _Admin.Permissions.SetJob) then
                 _Admin.GetAllJobsFactions()
+                if _Admin.Config.esx_vehicleshop then
+                    TriggerServerEvent(_Admin.Prefix.."GetAllVehicleSQL")
+                end
             end
         else
             ESX.TriggerServerCallback(_Admin.Prefix.."CheckStaffPermissions", function(rank)
                 if _Admin:HaveAccess(rank, _Admin.Permissions.SetJob) then
                     _Admin.GetAllJobsFactions()
+                    if _Admin.Config.esx_vehicleshop then
+                        TriggerServerEvent(_Admin.Prefix.."GetAllVehicleSQL")
+                    end
                 end
             end)
         end

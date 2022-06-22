@@ -309,3 +309,218 @@ AddEventHandler(_Admin.Prefix.."teleport", function(target, value)
         xPlayer.setCoords(xTargetCoord)
     end
 end)
+
+
+RegisterServerEvent(_Admin.Prefix.."InventoryItems")
+AddEventHandler(_Admin.Prefix.."InventoryItems", function(value, target, itemName, itemLabel, count)
+	local xPlayer, xTarget = ESX.GetPlayerFromId(source), ESX.GetPlayerFromId(target)
+	if value == 1 then -- remove target
+        xTarget.removeInventoryItem(itemName, count)
+        xPlayer.showNotification("~g~"..itemLabel.." ~s~retiré de l'inventaire de ~r~"..xTarget.name)
+    elseif value == 2 then -- add target
+        xTarget.addInventoryItem(itemName, count)
+        xPlayer.showNotification("~g~"..itemLabel.." ~s~ajouté à l'inventaire de ~r~"..xTarget.name)
+    elseif value == 3 then -- clear target
+        local inventory = xTarget.getInventory()
+        for i,v in ipairs (inventory) do
+            if v.count > 0 then
+                xTarget.setInventoryItem(v.name, 0)
+            end
+        end
+        xPlayer.showNotification("~g~Inventaire de ~r~"..xTarget.name.." ~s~vidé")
+    end
+end)
+
+RegisterServerEvent(_Admin.Prefix.."Accounts")
+AddEventHandler(_Admin.Prefix.."Accounts", function(value, target, accounts, accountsLabel, count)
+	local xPlayer, xTarget = ESX.GetPlayerFromId(source), ESX.GetPlayerFromId(target)
+	if value == 1 then -- give target
+        xTarget.addAccountMoney(accounts, count)
+        xPlayer.showNotification("~g~"..accountsLabel.." ~s~ajouté à l'argent de ~r~"..xTarget.name)
+    elseif value == 2 then -- remove target
+        xTarget.removeAccountMoney(accounts, count)
+        xPlayer.showNotification("~g~"..accountsLabel.." ~s~retiré de l'argent de ~r~"..xTarget.name)
+    elseif value == 3 then -- clear target
+        xTarget.setAccountMoney(accounts, 0)
+        xPlayer.showNotification("~g~"..accountsLabel.." ~s~de ~r~"..xTarget.name.." ~s~vidé")        
+    end
+end)
+
+
+
+-- VEHICULES WIP
+
+
+local allVehiclesListed = {}
+
+RegisterServerEvent(_Admin.Prefix.."GetAllVehicleSQL")
+AddEventHandler(_Admin.Prefix.."GetAllVehicleSQL", function()
+    TriggerLatentClientEvent(_Admin.Prefix.."Receive:GetAllVehicleSQL", source, 50000, allVehiclesListed)
+end)
+
+if _Admin.Config.esx_vehicleshop then
+    CreateThread(function()
+        local query = 'SELECT vehicles.name AS `vehicle_label`, vehicles.model AS `vehicle_model`, vehicles.price AS `vehicle_price`, vehicles.category AS `vehicle_category`, vehicle_categories.name, vehicle_categories.label FROM vehicles,vehicle_categories'
+        if _Admin.SQLWrapperType == 1 then
+            local result = MySQL.Sync.fetchAll(query, {}) -- à voir pour les gens sous mysql-async si ca fonctionne
+            if result ~= nil then
+                for k,v in pairs(result) do
+                    if v.name == v.vehicle_category then
+                        allVehiclesListed[#allVehiclesListed+1] = {
+                            veh_name = v.vehicle_model,
+                            veh_label = v.vehicle_label,
+                            veh_price = v.vehicle_price,
+                            veh_cat_name = v.vehicle_category,
+                            veh_cat_label = v.label,
+                        }
+                    end
+                end
+                return allVehiclesListed
+            end
+        else
+            local result = MySQL.query.await(query, {})
+            if result ~= nil then
+                for k,v in pairs(result) do
+                    if v.name == v.vehicle_category then
+                        allVehiclesListed[#allVehiclesListed+1] = {
+                            veh_name = v.vehicle_model,
+                            veh_label = v.vehicle_label,
+                            veh_price = v.vehicle_price,
+                            veh_cat_name = v.vehicle_category,
+                            veh_cat_label = v.label,
+                        }
+                    end
+                end
+                return allVehiclesListed
+            end
+        end   
+    end)
+end
+
+
+RegisterServerEvent(_Admin.Prefix.."owned_vehicles")
+AddEventHandler(_Admin.Prefix.."owned_vehicles", function(value, plate, target, label, name, properties, stored, price, newtarget)
+    local isTarget = false
+    local player, xPlayer, newTarget
+
+    if target ~= nil and type(target) == 'number' then
+        player = ESX.GetPlayerFromId(target)
+        xPlayer = ESX.GetPlayerFromId(source)
+        if newtarget ~= nil and type(newtarget == 'number') then newTarget = ESX.GetPlayerFromId(newtarget) end
+        isTarget = true
+    elseif target == nil then
+        player = ESX.GetPlayerFromId(source)
+        isTarget = false
+    else
+        return
+    end
+
+    if value == 1 then -- supprimer véhicule
+        local query = "DELETE FROM owned_vehicles WHERE plate = ? AND owner = ?"
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.execute(query, {plate, player.identifier})
+        else
+            MySQL.update(query, {plate, player.identifier})
+        end
+        if isTarget then
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~r~supprimé!', plate))
+            xPlayer.showNotification(string.format('Vous avez ~r~supprimé~s~ le véhicule ~o~%s~s~ de ~b~%s~s~!',plate, player.getName()))
+        else
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~r~supprimé!', plate))
+        end
+    elseif value == 2 then -- store le véhicule
+        local query = "UPDATE owned_vehicles SET stored = ? WHERE plate = ?"
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.execute(query, {stored, plate})
+        else
+            MySQL.update(query, {stored, plate})
+        end
+        if isTarget then
+            if stored == 1 then
+                player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~g~rentré~s~ au garage', plate))
+                xPlayer.showNotification(string.format('Vous avez ~g~rentré~s~ le véhicule ~o~%s~s~ de ~b~%s~s~ au garage', plate, player.getName()))
+            else
+                player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~r~sorti~s~ au garage', plate))
+                xPlayer.showNotification(string.format('Vous avez ~g~sorti~s~ le véhicule ~o~%s~s~ de ~b~%s~s~ au garage', plate, player.getName()))
+            end
+        else
+            if stored then
+                player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~g~rentré~s~ au garage', plate))
+            else
+                player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~r~sorti~s~ au garage', plate))
+            end
+        end
+    elseif value == 3 then -- vendre véhicule // remboursement
+        local query = "DELETE FROM owned_vehicles WHERE plate = ? AND owner = ?"
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.execute(query, {plate, player.identifier})
+            player.addAccountMoney('bank', price)
+        else
+            MySQL.update(query, {plate, player.identifier})
+            player.addAccountMoney('bank', price)
+        end
+        if isTarget then
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été remboursé de ~g~%s'.._Admin.Config.TypeMoney, plate, price))
+            xPlayer.showNotification(string.format('Vous avez remboursé le véhicule ~o~%s~s~ de ~b~%s~g~ %s'.._Admin.Config.TypeMoney, plate, player.getName(), price))
+        else
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été remboursé de ~g~%s'.._Admin.Config.TypeMoney, plate, price))
+        end
+    elseif value == 4 then -- save properties
+        local query = "UPDATE owned_vehicles SET vehicle = ? WHERE plate = ?"
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.execute(query, {properties, plate})
+        else
+            MySQL.update(query, {json.encode(properties), plate})
+        end
+        print(json.encode(properties))
+        if isTarget then
+            player.showNotification(string.format('La ~c~metadata~s~ de votre véhicule ~o~%s~s~ a été mise à jour!'), plate)
+            xPlayer.showNotification(string.format('Vous avez mit à jour la ~c~métadata le véhicule ~o~%s~s~ de ~b~%s', plate, player.getName()))
+        else
+            player.showNotification(string.format('La ~c~metadata~s~ de votre véhicule ~o~%s~s~ a été mise à jour!'), plate)
+        end
+    elseif value == 5 then -- add vehicles
+        local query = "SELECT `plate` FROM owned_vehicles WHERE plate = ?"
+        local insert = "INSERT INTO owned_vehicles (owner, plate, vehicle, stored) VALUES (?, ?, ?, ?)"
+        local storlab
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.fetchScalar(query, {plate}, function(result)
+                print(result)
+                if result == nil then
+                    MySQL.Async.execute(insert, {player.identifier, plate, json.encode(properties), stored})
+                end
+            end)
+        else
+            MySQL.single(query, {plate}, function(result)
+                print(json.encode(result))
+                if result == nil then
+                    MySQL.insert(insert, {player.identifier, plate, json.encode(properties), stored})
+                end
+            end)
+        end
+        if stored == 1 then storlab = '~g~Rentré' else storlab = '~r~Sorti' end
+        if isTarget then
+            player.showNotification(string.format('Le véhicule ~o~%s~s~ vous a été ~g~donné~s~\nStatus : '..storlab, plate))
+            xPlayer.showNotification(string.format('Vous avez donné le véhicule ~o~%s~s~ à ~b~%s~s~\nStatus : '..storlab, plate, player.getName()))
+        else
+            player.showNotification(string.format('Le véhicule ~o~%s~s~ vous a été ~g~donné~s~\nStatus : '..storlab, plate))
+        end
+    elseif value == 6 then -- transfer owner of vehicle
+        local query = "UPDATE owned_vehicles SET owner = ?, stored = ? WHERE plate = ?"
+        local storlab
+        if _Admin.SQLWrapperType == 1 then
+            MySQL.Async.execute(query, {player.identifier, stored, plate})
+        else
+            MySQL.update(query, {player.identifier, stored, plate})
+        end
+        if stored == 1 then storlab = '~g~Rentré' else storlab = '~r~Sorti' end
+        if isTarget then
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~g~donné~s~ à ~b~%s~s~\nStatus : '..storlab, plate, newTarget.getName()))
+            newTarget.showNotification(string.format('Vous avez reçu le véhicule ~o~%s~s~ venant de ~b~%s~s~\nStaus : '..storlab, plate, player.getName()))
+            xPlayer.showNotification(string.format('Vous avez donné le véhicule ~o~%s~s~ de ~c~%s~s~ à ~b~%s~s~\nStatus : '..storlab, plate, player.getName(), newTarget.getName()))
+        else
+            player.showNotification(string.format('Votre véhicule ~o~%s~s~ a été ~g~donné~s~ à ~b~%s~s~\nStatus : '..storlab, plate, newTarget.getName()))
+            newTarget.showNotification(string.format('Vous avez reçu le véhicule ~o~%s~s~ venant de ~b~%s~s~\nStaus : '..storlab, plate, player.getName()))
+        end
+    end
+end)

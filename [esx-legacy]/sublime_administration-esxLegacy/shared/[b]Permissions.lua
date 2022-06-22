@@ -14,6 +14,7 @@ _Admin.Permissions = {
 
     NoClip = {3;2;1};
     SetJob = {3;2;1};
+    GiveVehicle = {3,2,1};
 
     Button_PlayerConnected = { access = {3;2;1}; inside = {
         --

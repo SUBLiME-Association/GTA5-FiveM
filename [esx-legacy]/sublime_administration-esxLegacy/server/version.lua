@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------------------
 --------------------------------VERSION CHECK----------------------------------------------
 -------------------------------------------------------------------------------------------
--- Ne pas toucher
+-- Ne pas toucher! / Don't touch it!
 local Version = 
 ([==[{ 
     "enable": true,
 	"script": "sublime_administration",
-    "version": "1.4.5",
-    "changelog": "^2\n\t- 1.4.3 : Correction sur la vérification des Owners, vous pouvez à présent être plusieurs Owners dans la table : _Admin.MainUser,^2\n\t- 1.4.4 : Rajout de la fonction de base CheckOwner pour d'autre fonction qui l'utilisé sans problème,^2\n\t- 1.4.4 : Changement sur le fichier .sql suite au varchar sur l'identifier trop court pour cetaine licence rockstar,^2\n\t- 1.4.5 : Ajout de la possibilité en noclip de rotate via la souris (merci #Legiatrem#2821 pour ta contribution),^2\n\t- 1.4.5 : Quand l'option souris du noclip est sur true (il l'est défaut) dans le config alors les touches gauche/droite son retiré en bas sur le help commande,^2\n\t- 1.4.5 : Le Goto passe à présent comme le Bring côté serveur cela devrait régler certain problème par moment l'impossibilité de ce téléporter sur le player target",
+    "version": "1.5.0",
+    "changelog": "^2\n\t- Ajout gestion d'inventaire dans la liste des joueurs,^2\n\t- Ajout gestion des comptes dans la liste des joueurs,^2\n\t- Ajout gestion des véhicule (voir config.lua) dans la liste des joueurs",
 	"link": "https://github.com/SUBLiME-Association/GTA5-FiveM/tree/main/%5Besx-legacy%5D/sublime_administration-esxLegacy"
 }]==])
 
